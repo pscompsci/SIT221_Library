@@ -4,14 +4,32 @@
 
 namespace SIT221_Library
 {
+    /// <summary>
+    /// Double linked-list that maintains the order of the elements
+    /// in the list. This implementation requires that the type
+    /// of data for the list, implements the IComparable interface.
+    /// </summary>
+    /// <typeparam name="T">The type to set for the list</typeparam>
     public class OrderedLinkedList<T> where T : IComparable
     {
+        /// <summary>
+        /// Individual data element of the linked list. Stores
+        /// a reference to both the next and the previous
+        /// elements of the list.
+        /// </summary>
+        /// <typeparam name="T">The type of data</typeparam>
         public class Node<T> where T : IComparable
         {
             public T Data { get; set; }
             public Node<T> Next { get; set; }
             public Node<T> Prev { get; set; }
 
+            /// <summary>
+            /// Creates a node with the data and
+            /// sets the next and previous elements
+            /// to null.
+            /// </summary>
+            /// <param name="data">Data to be stored in the node</param>
             public Node(T data)
             {
                 Data = data;
@@ -40,12 +58,20 @@ namespace SIT221_Library
             }
         }
 
+        /// <summary>
+        /// Creates a new, empty linked list
+        /// </summary>
         public OrderedLinkedList()
         {
             Head = null;
             Count = 0;
         }
 
+        /// <summary>
+        /// Adds an element to the list. If the list is empty,
+        /// the element is set as the head of the list
+        /// </summary>
+        /// <param name="element">The element to add to the list</param>
         public void Add(T element)
         {
             Node<T> node = new Node<T>(element);
@@ -74,12 +100,22 @@ namespace SIT221_Library
             ++Count;
         }
 
+        /// <summary>
+        /// Clears the linked list, removing all
+        /// references to previous elements.
+        /// </summary>
         public void Clear()
         {
             Head = null;
             Count = 0;
         }
 
+        /// <summary>
+        /// Determines whether the linked list contains any node that stores
+        /// the target data value.
+        /// </summary>
+        /// <param name="target">The value to search for in the list</param>
+        /// <returns>True if the target value is in the list and false otherwise</returns>
         public bool Contains(T target)
         {
             if(Head == null) return false;
@@ -93,6 +129,16 @@ namespace SIT221_Library
             return false;
         }
 
+        /// <summary>
+        /// Removes an element from the linked list. If the element to remove is the 
+        /// head of the list, the next element in the list is set as the new head.
+        /// If there is no second element in the list, the all references of the head
+        /// will be null.
+        /// If the value is not present in the list, false is returned.
+        /// </summary>
+        /// <param name="target">The value to remove if present</param>
+        /// <returns>True if the element is present and is removed. False 
+        /// otherwise</returns>
         public bool Remove(T target)
         {
             if(Head == null) return false;
