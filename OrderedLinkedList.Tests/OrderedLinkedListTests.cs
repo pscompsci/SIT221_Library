@@ -3,11 +3,11 @@ using Xunit;
 
 namespace SIT221_Library.OrderedLinkedList.Tests
 {
-    public class OrderedLinkedList_LinkedListShould
+    public class OrderedLinkedListTests
     {
         private OrderedLinkedList<int> intList;
 
-        public OrderedLinkedList_LinkedListShould()
+        public OrderedLinkedListTests()
         {
             intList = new OrderedLinkedList<int>();
         }
