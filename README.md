@@ -67,9 +67,9 @@ Project Link: [https://github.com/pscompsci/SIT221_Library](https://github.com/p
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=flat-square
+[contributors-shield]: https://img.shields.io/github/contributors/pscompsci/SIT_Library.svg?style=flat-square
 [contributors-url]: https://github.com/pscompsci/SIT221_Library/graphs/contributors
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=flat-square
+[issues-shield]: https://img.shields.io/github/issues/pscompsci/SIT221_Library.svg?style=flat-square
 [issues-url]: https://github.com/pscompsci/SIT221_Library/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=flat-square
+[license-shield]: https://img.shields.io/github/license/pscompsci/SIT221_Library.svg?style=flat-square
 [license-url]: https://github.com/pscompsci/SIT221_Library/blob/master/LICENSE.txt
