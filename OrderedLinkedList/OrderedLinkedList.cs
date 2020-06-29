@@ -95,6 +95,13 @@ namespace SIT221_Library
             }
             node.Prev = current.Prev;
             node.Next = current;
+            if (current == Head)
+            {
+                current.Prev = node;
+                Head = node;
+                ++Count;
+                return;
+            }
             current.Prev.Next = node;
             current.Prev = node;
             ++Count;

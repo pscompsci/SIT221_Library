@@ -7,7 +7,10 @@ namespace SIT221_Library.Vector.Tests
     {
         private Vector<int> iVec;
 
-        public VectorTests() => iVec = new Vector<int>();
+        public VectorTests()
+        {
+            iVec = new Vector<int>();
+        }
 
         [Fact]
         public void Vector_CreatsOK() => Assert.NotNull(iVec);

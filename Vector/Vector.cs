@@ -74,7 +74,7 @@ namespace SIT221_Library
         /// the indicated capacity is less than 0</exception>
         public Vector(int capacity)
         {
-            if(capacity < 0)
+            if(capacity <= 0)
                 throw new ArgumentOutOfRangeException("Capacity must be > 0");
             _items = new T[capacity];
             _count = 0;
