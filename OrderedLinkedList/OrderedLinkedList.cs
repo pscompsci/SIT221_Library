@@ -10,19 +10,19 @@ namespace SIT221_Library
     /// of data for the list, implements the IComparable interface.
     /// </summary>
     /// <typeparam name="T">The type to set for the list</typeparam>
-    public class OrderedLinkedList<T> where T : IComparable
+    public class OrderedLinkedList<T> where T : IComparable<T>
     {
         /// <summary>
         /// Individual data element of the linked list. Stores
         /// a reference to both the next and the previous
         /// elements of the list.
         /// </summary>
-        /// <typeparam name="T">The type of data</typeparam>
-        public class Node<T> where T : IComparable
+        /// <typeparam name="U">The type of data</typeparam>
+        public class Node<U> where U : IComparable<U>
         {
-            public T Data { get; set; }
-            public Node<T> Next { get; set; }
-            public Node<T> Prev { get; set; }
+            public U Data { get; set; }
+            public Node<U> Next { get; set; }
+            public Node<U> Prev { get; set; }
 
             /// <summary>
             /// Creates a node with the data and
@@ -30,7 +30,7 @@ namespace SIT221_Library
             /// to null.
             /// </summary>
             /// <param name="data">Data to be stored in the node</param>
-            public Node(T data)
+            public Node(U data)
             {
                 Data = data;
                 Next = null;
@@ -75,8 +75,9 @@ namespace SIT221_Library
         public void Add(T element)
         {
             Node<T> node = new Node<T>(element);
-            if (Head == null) 
+            if (Head is null) 
             {
+                // First entry into empty list
                 Head = node; 
                 ++Count;
                 return;
@@ -86,6 +87,7 @@ namespace SIT221_Library
             {
                 if (current.Next == null) 
                 {
+                    // Insert at the end of the list
                     current.Next = node;
                     node.Prev = current;
                     ++Count;
@@ -97,6 +99,7 @@ namespace SIT221_Library
             node.Next = current;
             if (current == Head)
             {
+                // Insert as new Head node
                 current.Prev = node;
                 Head = node;
                 ++Count;
@@ -125,13 +128,13 @@ namespace SIT221_Library
         /// <returns>True if the target value is in the list and false otherwise</returns>
         public bool Contains(T target)
         {
-            if(Head == null) return false;
+            if(Head is null) return false;
             Node<T> current = Head;
             if(current.Data.Equals(target)) return true;
-            while(!current.Data.Equals(target) && current.Next != null)
+            while(current.Next != null)
             {
-                current = current.Next;
                 if(current.Data.Equals(target)) return true;
+                current = current.Next;
             }
             return false;
         }
@@ -148,7 +151,7 @@ namespace SIT221_Library
         /// otherwise</returns>
         public bool Remove(T target)
         {
-            if(Head == null) return false;
+            if(Head is null) return false;
             Node<T> current = Head;
             if(current.Data.CompareTo(target) == 0)
             {
@@ -177,6 +180,20 @@ namespace SIT221_Library
                 }
             }
             return false;
+        }
+
+        public override string ToString()
+        {
+            string result = "";
+            if (Head == null) return "";
+            Node<T> current = Head;
+            while (current.Next != null)
+            {
+                result += current.Data.ToString() + "\n";
+                current = current.Next;
+            }
+            result += current.Data.ToString() + "\n";
+            return result;
         }
     }
 }

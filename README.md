@@ -55,6 +55,17 @@ The code is primarily C# .NET, however some files are written in Go or Java.
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
+<!-- DATA STRUCTURES -->
+## Data Structures
+
+* [Vector](/Vector/Vector.cs)
+* [Ordered Linked List](/OrderedLinkedList/OrderedLinkedList.cs)
+
+<!-- TESTING -->
+
+To run all unit tests, run:
+
+```dotnet test```
 
 <!-- CONTACT -->
 ## Contact
