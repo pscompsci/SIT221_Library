@@ -130,53 +130,92 @@ namespace DoublyLinkedList
         // TODO: Your task is to implement all the remaining methods.
         // Read the instruction carefully, study the code examples from above as they should help you to write the rest of the code.
 
+        /// <summary>
+        /// Returns the node before the passed in node, if both exist. If the node does not exist, null
+        /// is returned.
+        /// </summary>
+        /// <param name="node"></param>
+        /// <returns>The node before the passed in node</returns>
+        /// <exception cref="System.ArgumentNullException">Thrown when the node is null</exception>
+        /// <exception cref="System.InvalidOperationException">Thrown when the node to 
+        /// return the node of before, does not exist</exception>
         public INode<T> Before(INode<T> node)
         {
             if (node is null) throw new NullReferenceException();
-            Node<T> node_current = node as Node<T>;
-            if (node_current.Previous == null || node_current.Next == null) throw new InvalidOperationException("The node referred as 'before' is no longer in the list");
-            if (node_current.Previous.Equals(Head)) return null;
-            else return node_current.Previous;
+            Node<T> nodeCurrent = node as Node<T>;
+            if (nodeCurrent.Previous == null || nodeCurrent.Next == null) 
+                throw new InvalidOperationException("The node referred as 'before' is no longer in the list");
+            if (nodeCurrent.Previous.Equals(Head)) return null;
+            else return nodeCurrent.Previous;
         }
 
+        /// <summary>
+        /// Adds a new node at the head of the linked list
+        /// </summary>
+        /// <param name="value">The value to add as a new node</param>
+        /// <returns>The node added to the head of the list</returns>
         public INode<T> AddFirst(T value)
         {
-            return AddBetween(value, Head, Head.Previous);
+            return AddBetween(value, Head, Head.Next);
         }
 
+        /// <summary>
+        /// Adds a node into the linked list before an existing node
+        /// </summary>
+        /// <param name="before">The node to add before</param>
+        /// <param name="value">The value to add as a new node</param>
+        /// <returns></returns>
         public INode<T> AddBefore(INode<T> before, T value)
         {
-            Node<T> node_before = before as Node<T>;
-            return AddBetween(value, node_before.Previous, node_before);
+            Node<T> nodeBefore = before as Node<T>;
+            return AddBetween(value, nodeBefore.Previous, nodeBefore);
         }
 
+        /// <summary>
+        /// Inserts a node with the required value, after an existing now
+        /// </summary>
+        /// <param name="after">The node with value to add after</param>
+        /// <param name="value">The value to add as a new node</param>
+        /// <returns>INode added to the linked list</returns>
         public INode<T> AddAfter(INode<T> after, T value)
         {
-            Node<T> node_after = after as Node<T>;
-            return AddBetween(value, node_after, node_after.Next);
+            Node<T> nodeAfter = after as Node<T>;
+            return AddBetween(value, nodeAfter, nodeAfter.Next);
         }
 
+        /// <summary>
+        /// Clear all nodes from the linked list and returns it's state
+        /// back to the same as a new linked list.
+        /// </summary>
         public void Clear()
         {
-            Tail = null;
-            Head = null;
+            Head = new Node<T>(default(T), null, null);
+            Tail = new Node<T>(default(T), Head, null);
+            Head.Next = Tail;
             Count = 0;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="node">The node to remove if it exists. This will find only
+        /// the first occurence of the node with the corresponding value</param>
+        /// <exception cref="System.ArgumentNullException">Thrown when the node is null</exception>
+        /// <exception cref="System.InvalidOperationException">Thrown when the node to 
+        /// remove does not exist</exception>
         public void Remove(INode<T> node)
         {
             if (node is null) throw new ArgumentNullException();
-            Node<T> n = node as Node<T>;
-            Node<T> target = Find(n.Value) as Node<T>;
-            if (target is null) throw new InvalidOperationException();
-
-            target.Previous.Next = target.Next;
-            target.Next.Previous = target.Previous;
-            target.Next = null;
-            target.Previous = null;
+            Node<T> remove = Find(node.Value) as Node<T>;
+            if (remove is null) throw new InvalidOperationException();
+            remove.Previous.Next = remove.Next;
+            remove.Next.Previous = remove.Previous;
             Count--;
         }
 
+        /// <summary>
+        /// Removes the Head node in the linked list
+        /// </summary>
         public void RemoveFirst()
         {
             if (Count is 0) throw new InvalidOperationException();
@@ -185,6 +224,9 @@ namespace DoublyLinkedList
             Count--;
         }
 
+        /// <summary>
+        /// Removes the Tail node in the linked list
+        /// </summary>
         public void RemoveLast()
         {
             if (Count is 0) throw new InvalidOperationException();
@@ -192,6 +234,5 @@ namespace DoublyLinkedList
             Tail.Next = null;
             Count--;
         }
-
     }
 }

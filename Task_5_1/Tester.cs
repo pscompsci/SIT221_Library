@@ -274,7 +274,7 @@ namespace DoubleLinkedList
 
             Console.WriteLine("\n\n ------------------- SUMMARY ------------------- ");
             Console.WriteLine("Tests passed: " + result);
-            Console.ReadKey();
+            // Console.ReadKey();
 
         }
     }
