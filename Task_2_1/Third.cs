@@ -14,7 +14,7 @@ namespace Task_2_1
         public double Execute(int runs, int N, Case complexity)
         {
             double totalOperations = 0.0;
-            bool unlucky = false;
+            bool unlucky;
 
             for(int r = 0; r < runs; r++)
             {
