@@ -167,6 +167,7 @@ namespace DoublyLinkedList
         /// <returns></returns>
         public INode<T> AddBefore(INode<T> before, T value)
         {
+            if (before is null) throw new NullReferenceException();
             Node<T> nodeBefore = before as Node<T>;
             return AddBetween(value, nodeBefore.Previous, nodeBefore);
         }
@@ -196,7 +197,8 @@ namespace DoublyLinkedList
         }
 
         /// <summary>
-        /// 
+        /// Removes a node from the linked list if it exists.This will remove the first
+        /// instance of a node with the defined value
         /// </summary>
         /// <param name="node">The node to remove if it exists. This will find only
         /// the first occurence of the node with the corresponding value</param>

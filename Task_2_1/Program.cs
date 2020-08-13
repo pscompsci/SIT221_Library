@@ -13,8 +13,8 @@ namespace Task_2_1
     {
         static void Main(string[] args)
         {
-            int runs = 100;
-            int N = 8;
+            int runs = 1000000;
+            int N = 10;
 
             BestGenerator bestRand = new BestGenerator();
             AverageGenerator averageRand = new AverageGenerator();

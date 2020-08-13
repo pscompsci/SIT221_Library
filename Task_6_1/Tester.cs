@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace Task_6_1
 {
@@ -15,6 +16,9 @@ namespace Task_6_1
             Console.WriteLine(SumExists.Check(numbers, 0));   // true
             Console.WriteLine(SumExists.Check(numbers, 42));  // true
             Console.WriteLine(SumExists.Check(numbers, 69));  // true
+            Console.WriteLine(SumExists.Check(numbers, -100));// false
+            Console.WriteLine(SumExists.Check(numbers, 1));   // true
+            Console.WriteLine(SumExists.Check(numbers, 100)); // false
         }
     }
 }

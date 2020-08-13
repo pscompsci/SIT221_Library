@@ -13,7 +13,7 @@ namespace Task_6_1
             while (i < j)                                              // n in worst case                                       
             {
                 if (numbers[i] + numbers[j] == sum) return true;       // n - 1 in worst case
-                else if (numbers[i] + numbers[j] < sum) i++;           // n - 1 in worst case
+                else if (numbers[i] + numbers[j] < sum) i++;           // 2(n - 1) in worst case
                 else j--;                                              // n - 1 in worst case
             }
             return false;                                              // 1 operation
