@@ -77,7 +77,8 @@ namespace DoublyLinkedList
         {
             if (node == null) throw new NullReferenceException();
             Node<T> node_current = node as Node<T>;
-            if (node_current.Previous == null || node_current.Next == null) throw new InvalidOperationException("The node referred as 'before' is no longer in the list");
+            if (node_current.Previous == null || node_current.Next == null) 
+                throw new InvalidOperationException("The node referred as 'before' is no longer in the list");
             if (node_current.Next.Equals(Tail)) return null;
             else return node_current.Next;
         }
@@ -142,11 +143,11 @@ namespace DoublyLinkedList
         public INode<T> Before(INode<T> node)
         {
             if (node is null) throw new NullReferenceException();
-            Node<T> nodeCurrent = node as Node<T>;
-            if (nodeCurrent.Previous == null || nodeCurrent.Next == null) 
+            Node<T> result = node as Node<T>;
+            if (result.Previous == null || result.Next == null) 
                 throw new InvalidOperationException("The node referred as 'before' is no longer in the list");
-            if (nodeCurrent.Previous.Equals(Head)) return null;
-            else return nodeCurrent.Previous;
+            if (result.Previous.Equals(Head)) return null;
+            else return result.Previous;
         }
 
         /// <summary>
@@ -164,12 +165,17 @@ namespace DoublyLinkedList
         /// </summary>
         /// <param name="before">The node to add before</param>
         /// <param name="value">The value to add as a new node</param>
-        /// <returns></returns>
+        /// <returns>Node added to the list</returns>
+        /// <exception cref="System.ArgumentNullException">Thrown when the node is null</exception>
+        /// <exception cref="System.InvalidOperationException">Thrown when the node to 
+        /// remove does not exist</exception>
         public INode<T> AddBefore(INode<T> before, T value)
         {
             if (before is null) throw new NullReferenceException();
-            Node<T> nodeBefore = before as Node<T>;
-            return AddBetween(value, nodeBefore.Previous, nodeBefore);
+            Node<T> result = before as Node<T>;
+            if (result != null || result.Next != null)
+                return AddBetween(value, result.Previous, result);
+            throw new InvalidOperationException();
         }
 
         /// <summary>
@@ -177,11 +183,17 @@ namespace DoublyLinkedList
         /// </summary>
         /// <param name="after">The node with value to add after</param>
         /// <param name="value">The value to add as a new node</param>
-        /// <returns>INode added to the linked list</returns>
+        /// <returns>Node added to the linked list</returns>
+        /// <exception cref="System.ArgumentNullException">Thrown when the node is null</exception>
+        /// <exception cref="System.InvalidOperationException">Thrown when the node to 
+        /// remove does not exist</exception>
         public INode<T> AddAfter(INode<T> after, T value)
         {
-            Node<T> nodeAfter = after as Node<T>;
-            return AddBetween(value, nodeAfter, nodeAfter.Next);
+            if (after is null) throw new ArgumentNullException();
+            Node<T> result = after as Node<T>;
+            if (result.Previous != null || result.Next != null)
+                return AddBetween(value, result, result.Next);
+            throw new InvalidOperationException();
         }
 
         /// <summary>
@@ -208,10 +220,13 @@ namespace DoublyLinkedList
         public void Remove(INode<T> node)
         {
             if (node is null) throw new ArgumentNullException();
-            Node<T> remove = Find(node.Value) as Node<T>;
-            if (remove is null) throw new InvalidOperationException();
-            remove.Previous.Next = remove.Next;
-            remove.Next.Previous = remove.Previous;
+            Node<T> result = node as Node<T>;
+            if (result.Next is null && result.Previous is null)
+                throw new InvalidOperationException();
+            result.Previous.Next = result.Next;
+            result.Next.Previous = result.Previous;
+            result.Next = null;
+            result.Previous = null;
             Count--;
         }
 
@@ -222,7 +237,7 @@ namespace DoublyLinkedList
         {
             if (Count is 0) throw new InvalidOperationException();
             Head = Head.Next;
-            Head.Previous = null;
+            Head.Previous = Tail;
             Count--;
         }
 
@@ -233,7 +248,7 @@ namespace DoublyLinkedList
         {
             if (Count is 0) throw new InvalidOperationException();
             Tail = Tail.Previous;
-            Tail.Next = null;
+            Tail.Next = Head;
             Count--;
         }
     }
