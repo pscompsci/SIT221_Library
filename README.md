@@ -47,8 +47,6 @@ The code is primarily C# .NET, however some files are written in Go or Java.
 ### Built With
 
 * [C# .NET](https://docs.microsoft.com/en-us/dotnet/csharp/getting-started/introduction-to-the-csharp-language-and-the-net-framework)
-* [Go](https://golang.org/)
-* [Java](https://www.oracle.com/java/technologies/javase-downloads.html)
 
 <!-- LICENSE -->
 ## License
@@ -58,8 +56,24 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- DATA STRUCTURES -->
 ## Data Structures
 
-* [Vector](/Vector/Vector.cs)
-* [Ordered Linked List](/OrderedLinkedList/OrderedLinkedList.cs)
+* [Vector](/Task_1_1/Vector.cs)
+* [Doubly Linked List](/Task_5_1/DoublyLinkedList.cs)
+
+<!-- ALGORITHMS -->
+## Algorithms
+
+* Bubblesort
+* Insertionsort
+* Seletionsort
+* Mergesort (recursive)
+* Mergesort Bottom Up (iterative)
+* Randomised in-place Quicksort
+* Binary Search
+
+<!-- DESIGN PATTERNS -->
+## Design Patterns
+
+* Iterator pattern
 
 <!-- TESTING -->
 
