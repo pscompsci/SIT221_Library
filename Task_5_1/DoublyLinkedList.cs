@@ -217,17 +217,40 @@ namespace DoublyLinkedList
         /// <exception cref="System.ArgumentNullException">Thrown when the node is null</exception>
         /// <exception cref="System.InvalidOperationException">Thrown when the node to 
         /// remove does not exist</exception>
+        // public void Remove(INode<T> node)
+        // {
+        //     if (node is null) throw new ArgumentNullException();
+        //     Node<T> result = node as Node<T>;
+        //     if (result.Next is null && result.Previous is null)
+        //         throw new InvalidOperationException();
+        //     result.Previous.Next = result.Next;
+        //     result.Next.Previous = result.Previous;
+        //     result.Next = null;
+        //     result.Previous = null;
+        //     Count--;
+        // }
+
         public void Remove(INode<T> node)
+        {
+            if (!ValidateNode(node)) throw new InvalidOperationException();
+            Node<T> result = node as Node<T>;
+            result.Previous.Next = result.Next;
+            result.Next.Previous = result.Previous;
+            InvalidateNode(result);
+            Count--;
+        }
+
+        private bool ValidateNode(INode<T> node)
         {
             if (node is null) throw new ArgumentNullException();
             Node<T> result = node as Node<T>;
-            if (result.Next is null && result.Previous is null)
-                throw new InvalidOperationException();
-            result.Previous.Next = result.Next;
-            result.Next.Previous = result.Previous;
-            result.Next = null;
-            result.Previous = null;
-            Count--;
+            return result.Next != null && result.Previous != null;
+        }
+
+        private void InvalidateNode(Node<T> node)
+        {
+            node.Next = null;
+            node.Previous = null;
         }
 
         /// <summary>

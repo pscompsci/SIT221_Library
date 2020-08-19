@@ -365,10 +365,10 @@ namespace Task_4_1
                 result = result + "-";
             }
 
-            // test J
+            // test L
             try
             {
-                Console.WriteLine("\nTest J: Check the content of the Vector<Student> by traversing it via 'foreach' statement ");
+                Console.WriteLine("\nTest L: Check the content of the Vector<Student> by traversing it via 'foreach' statement ");
                 if (!CheckSequence(certificate_student, students)) throw new Exception("The 'foreach' statement produces an incorrect sequence of students");
                 Console.WriteLine(" :: SUCCESS");
                 result = result + "J";

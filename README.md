@@ -31,10 +31,14 @@
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
 
-* [About the Project](#about-the-project)
-  * [Built With](#built-with)
-* [License](#license)
-* [Contact](#contact)
+- [Table of Contents](#table-of-contents)
+- [About The Project](#about-the-project)
+  - [Built With](#built-with)
+- [License](#license)
+- [Data Structures](#data-structures)
+- [Algorithms](#algorithms)
+- [Design Patterns](#design-patterns)
+- [Contact](#contact)
 
 
 <!-- ABOUT THE PROJECT -->

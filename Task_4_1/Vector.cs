@@ -218,8 +218,7 @@ namespace Task_4_1
             /// <returns>Boolean whether the Vector is fully iterated</returns>
             public bool MoveNext()
             {
-                _currentIndex++;
-                return _currentIndex < _v.Count;
+                return ++_currentIndex < _v.Count;
             }
 
             /// <summary>

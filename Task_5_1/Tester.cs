@@ -274,6 +274,23 @@ namespace DoubleLinkedList
 
             Console.WriteLine("\n\n ------------------- SUMMARY ------------------- ");
             Console.WriteLine("Tests passed: " + result);
+
+            DoublyLinkedList<int> list1 = new DoublyLinkedList<int>();
+            DoublyLinkedList<int> list2 = new DoublyLinkedList<int>();
+
+            list1.AddLast(1); list1.AddLast(2); list1.AddLast(3);
+            list2.AddLast(4); list2.AddLast(5); list2.AddLast(6);
+
+            Console.WriteLine("\nBefore remove on list1:");
+            Console.WriteLine(list1.ToString());
+            Console.WriteLine(list2.ToString());
+
+            INode<int> node = list2.First;
+            list1.Remove(node);
+
+            Console.WriteLine("\nAfter remove on list1");
+            Console.WriteLine(list1.ToString());
+            Console.WriteLine(list2.ToString());
             // Console.ReadKey();
 
         }
