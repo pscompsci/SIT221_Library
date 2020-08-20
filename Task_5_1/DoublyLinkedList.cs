@@ -202,49 +202,41 @@ namespace DoublyLinkedList
         /// </summary>
         public void Clear()
         {
-            Head = new Node<T>(default(T), null, null);
-            Tail = new Node<T>(default(T), Head, null);
+            Node<T> current = Head.Next;
+            while (!current.Equals(Tail))
+            {
+                Node<T> temp = current;
+                current = current.Next;
+                InvalidateNode(temp);
+            }
             Head.Next = Tail;
+            Tail.Previous = Head;
             Count = 0;
         }
 
         /// <summary>
         /// Removes a node from the linked list if it exists.This will remove the first
-        /// instance of a node with the defined value
+        /// instance of a node with the defined value.
+        /// We need to use an O(n) approach for our existing data structure to prevent
+        /// the same node being removed twice, and to prevent nodes in one list being
+        /// used to remove nodes in another list.
+        /// Using Find ensures we know 100% that the node exists in the list we want to 
+        /// remove it from.
         /// </summary>
         /// <param name="node">The node to remove if it exists. This will find only
         /// the first occurence of the node with the corresponding value</param>
         /// <exception cref="System.ArgumentNullException">Thrown when the node is null</exception>
         /// <exception cref="System.InvalidOperationException">Thrown when the node to 
         /// remove does not exist</exception>
-        // public void Remove(INode<T> node)
-        // {
-        //     if (node is null) throw new ArgumentNullException();
-        //     Node<T> result = node as Node<T>;
-        //     if (result.Next is null && result.Previous is null)
-        //         throw new InvalidOperationException();
-        //     result.Previous.Next = result.Next;
-        //     result.Next.Previous = result.Previous;
-        //     result.Next = null;
-        //     result.Previous = null;
-        //     Count--;
-        // }
-
         public void Remove(INode<T> node)
         {
-            if (!ValidateNode(node)) throw new InvalidOperationException();
-            Node<T> result = node as Node<T>;
+            if (node is null) throw new ArgumentNullException();
+            Node<T> result = Find(node.Value) as Node<T>;
+            if (result is null) throw new InvalidOperationException();
             result.Previous.Next = result.Next;
             result.Next.Previous = result.Previous;
             InvalidateNode(result);
             Count--;
-        }
-
-        private bool ValidateNode(INode<T> node)
-        {
-            if (node is null) throw new ArgumentNullException();
-            Node<T> result = node as Node<T>;
-            return result.Next != null && result.Previous != null;
         }
 
         private void InvalidateNode(Node<T> node)
@@ -259,8 +251,10 @@ namespace DoublyLinkedList
         public void RemoveFirst()
         {
             if (Count is 0) throw new InvalidOperationException();
-            Head = Head.Next;
-            Head.Previous = Tail;
+            Node<T> node = Head.Next;
+            Head.Next = node.Next;
+            Head.Next.Previous = Head;
+            InvalidateNode(node);
             Count--;
         }
 
@@ -270,8 +264,10 @@ namespace DoublyLinkedList
         public void RemoveLast()
         {
             if (Count is 0) throw new InvalidOperationException();
-            Tail = Tail.Previous;
-            Tail.Next = Head;
+            Node<T> node= Tail.Previous;
+            Tail.Previous = node.Previous;
+            Tail.Previous.Next = Tail;
+            InvalidateNode(node);
             Count--;
         }
     }

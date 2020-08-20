@@ -275,6 +275,7 @@ namespace DoubleLinkedList
             Console.WriteLine("\n\n ------------------- SUMMARY ------------------- ");
             Console.WriteLine("Tests passed: " + result);
 
+            // Test 12
             DoublyLinkedList<int> list1 = new DoublyLinkedList<int>();
             DoublyLinkedList<int> list2 = new DoublyLinkedList<int>();
 
@@ -286,14 +287,47 @@ namespace DoubleLinkedList
             Console.WriteLine(list2.ToString());
 
             INode<int> node = list2.First;
-            list1.Remove(node);
+            try
+            {
+                list1.Remove(node);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Remove operation is invalid");
+            }
 
             Console.WriteLine("\nAfter remove on list1");
             Console.WriteLine(list1.ToString());
             Console.WriteLine(list2.ToString());
+
+            // Test 13
+            DoublyLinkedList<int> list3 = new DoublyLinkedList<int>();
+ 
+            list3.AddLast(1); list3.AddLast(2); list3.AddLast(3);
+
+            Console.WriteLine("\nBefore Clear on list3:");
+            Console.WriteLine(list3.ToString());
+            
+            INode<int> node2 = list3.First;
+            
+            list3.Clear();
+            
+            list3.AddLast(4); list3.AddLast(5); list3.AddLast(6);
+            try
+            {
+                list3.Remove(node2);            
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Remove not allowed");
+            }
+
+            Console.WriteLine("\nAfter Remove on previously Cleared list3:");
+            Console.WriteLine(list3.ToString());
+            
+
             // Console.ReadKey();
 
         }
     }
-
 }
