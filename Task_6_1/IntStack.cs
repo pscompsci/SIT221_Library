@@ -16,10 +16,10 @@ namespace Task_6_1
             _top = -1;
         }
 
-        public IntStack(int capacity)
+        public IntStack(int size)
         {
-            if (capacity < 0) throw new ArgumentOutOfRangeException();
-            _stack = new int[capacity];
+            if (size < 0) throw new ArgumentOutOfRangeException();
+            _stack = new int[size];
             _top = -1;
         }   
 

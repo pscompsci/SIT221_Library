@@ -62,6 +62,8 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 * [Vector](/Task_1_1/Vector.cs)
 * [Doubly Linked List](/Task_5_1/DoublyLinkedList.cs)
+* [Stack] (/Task_6_1/Stack.cs) - this generic implementation provides Push(), Pop() and Min() in Theta(1) time complexity
+* [Specialised Stack] (/Task_6_1/IntStack.cs)  - this implements Push(), Pop() and Min() in Theta(1) time complexity
 
 <!-- ALGORITHMS -->
 ## Algorithms

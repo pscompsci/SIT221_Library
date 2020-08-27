@@ -19,8 +19,17 @@ namespace Task_6_1
             _minCount = 0;
         }
 
+        public Stack(int size)
+        {
+            if (size < 0) throw new ArgumentOutOfRangeException();
+            _stack = new T[size];
+            _count = 0;
+            _min = new T[size];
+            _minCount = 0;
+        }
+
         private bool IsEmpty() => _count is 0 ? true : false;
-        private bool isFull() => _count is MAX_STACK_SIZE - 1 ? true : false;
+        private bool isFull() => _count >= _stack.Length - 1 ? true : false;
 
         public T Pop()
         {
@@ -38,10 +47,11 @@ namespace Task_6_1
         public void Push(T value)
         {
             if (isFull()) throw new StackOverflowException();
-            if (IsEmpty()) _min[++_minCount] = value;
+            if (IsEmpty()) _min[_minCount++] = value;
+                
             if (value.CompareTo(_min[_minCount - 1]) < 0)
             {
-                _min[++_minCount] = value;
+                _min[_minCount++] = value;
             } 
             _stack[++_count] = value;
         }
@@ -49,7 +59,7 @@ namespace Task_6_1
         public T Min()
         {
             if (IsEmpty()) throw new InvalidOperationException();
-            return _min[_minCount];
+            return _min[_minCount - 1];
         }
     }
 }
