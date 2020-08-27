@@ -136,6 +136,7 @@ namespace Task_4_1
                 Console.WriteLine("Resulting order: " + vector.ToString());
                 check = Array.BinarySearch(temp, temp[0] - 1, new AscendingIntComparer());
                 check = check < 0 ? -1 : check;
+                Console.WriteLine(data[0] - 1);
                 if (vector.BinarySearch(data[0] - 1, new AscendingIntComparer()) != check) throw new Exception("The resulting index (or return value) is incorrect.");
                 Console.WriteLine(" :: SUCCESS");
                 result = result + "B";

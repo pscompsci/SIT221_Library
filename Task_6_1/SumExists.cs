@@ -2,7 +2,7 @@ using System;
 
 namespace Task_6_1
 {
-    class SumExists
+    public class SumExists
     {
         public static bool Check(int[] numbers, int sum)
         {

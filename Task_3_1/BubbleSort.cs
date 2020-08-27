@@ -35,8 +35,8 @@ namespace Task_3_1
             // Iterative approach using Bubble-Down
             // (ie. largest element bubbled to the end of the array)
 
-            //for (int i = sequence.Length; i > 0; i--)
-            //{
+            // for (int i = sequence.Length; i > 0; i--)
+            // {
             //    for (int j = 0; j < sequence.Length - 1; j++)
             //    {
             //        if (comparer.Compare(sequence[j], sequence[j + 1]) > 0)
@@ -46,7 +46,7 @@ namespace Task_3_1
             //            sequence[j + 1] = temp;
             //        }
             //    }
-            //}
+            // }
         }
     }
 }

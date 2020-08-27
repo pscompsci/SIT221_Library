@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DoublyLinkedList
+namespace Task_5_1
 {
     public interface INode<K>
     {

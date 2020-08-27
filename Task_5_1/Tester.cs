@@ -1,7 +1,6 @@
-﻿using DoublyLinkedList;
-using System;
+﻿using System;
 
-namespace DoubleLinkedList
+namespace Task_5_1
 {
     class Tester
     {
@@ -276,54 +275,54 @@ namespace DoubleLinkedList
             Console.WriteLine("Tests passed: " + result);
 
             // Test 12
-            DoublyLinkedList<int> list1 = new DoublyLinkedList<int>();
-            DoublyLinkedList<int> list2 = new DoublyLinkedList<int>();
+            // DoublyLinkedList<int> list1 = new DoublyLinkedList<int>();
+            // DoublyLinkedList<int> list2 = new DoublyLinkedList<int>();
 
-            list1.AddLast(1); list1.AddLast(2); list1.AddLast(3);
-            list2.AddLast(4); list2.AddLast(5); list2.AddLast(6);
+            // list1.AddLast(1); list1.AddLast(2); list1.AddLast(3);
+            // list2.AddLast(4); list2.AddLast(5); list2.AddLast(6);
 
-            Console.WriteLine("\nBefore remove on list1:");
-            Console.WriteLine(list1.ToString());
-            Console.WriteLine(list2.ToString());
+            // Console.WriteLine("\nBefore remove on list1:");
+            // Console.WriteLine(list1.ToString());
+            // Console.WriteLine(list2.ToString());
 
-            INode<int> node = list2.First;
-            try
-            {
-                list1.Remove(node);
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Remove operation is invalid");
-            }
+            // INode<int> node = list2.First;
+            // try
+            // {
+            //     list1.Remove(node);
+            // }
+            // catch (Exception)
+            // {
+            //     Console.WriteLine("Remove operation is invalid");
+            // }
 
-            Console.WriteLine("\nAfter remove on list1");
-            Console.WriteLine(list1.ToString());
-            Console.WriteLine(list2.ToString());
+            // Console.WriteLine("\nAfter remove on list1");
+            // Console.WriteLine(list1.ToString());
+            // Console.WriteLine(list2.ToString());
 
-            // Test 13
-            DoublyLinkedList<int> list3 = new DoublyLinkedList<int>();
+            // // Test 13
+            // DoublyLinkedList<int> list3 = new DoublyLinkedList<int>();
  
-            list3.AddLast(1); list3.AddLast(2); list3.AddLast(3);
+            // list3.AddLast(1); list3.AddLast(2); list3.AddLast(3);
 
-            Console.WriteLine("\nBefore Clear on list3:");
-            Console.WriteLine(list3.ToString());
+            // Console.WriteLine("\nBefore Clear on list3:");
+            // Console.WriteLine(list3.ToString());
             
-            INode<int> node2 = list3.First;
+            // INode<int> node2 = list3.First;
             
-            list3.Clear();
+            // list3.Clear();
             
-            list3.AddLast(4); list3.AddLast(5); list3.AddLast(6);
-            try
-            {
-                list3.Remove(node2);            
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Remove not allowed");
-            }
+            // list3.AddLast(4); list3.AddLast(5); list3.AddLast(6);
+            // try
+            // {
+            //     list3.Remove(node2);            
+            // }
+            // catch (Exception)
+            // {
+            //     Console.WriteLine("Remove not allowed");
+            // }
 
-            Console.WriteLine("\nAfter Remove on previously Cleared list3:");
-            Console.WriteLine(list3.ToString());
+            // Console.WriteLine("\nAfter Remove on previously Cleared list3:");
+            // Console.WriteLine(list3.ToString());
             
 
             // Console.ReadKey();
