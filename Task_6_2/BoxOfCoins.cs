@@ -3,11 +3,18 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Task_6_2
 {
     public class BoxOfCoins
     {
+        /// <summary>
+        /// Prints out the table of values used to store the results
+        /// of calculations through different pathways
+        /// </summary>
+        /// <param name="table">2-dimensional array to print</param>
+        /// <param name="n">length or height of the square 2d array</param>
         public static void PrintTable(int[,] table, int n)
         {
             for(int i = 0; i < n; i++)
@@ -20,24 +27,42 @@ namespace Task_6_2
             }
         }
 
+        /// <summary>
+        /// Calculates the maximum difference possible for alternate
+        /// choice of treasure chests, picked from the left or right
+        /// end of a line of chest.
+        /// </summary>
+        /// <param name="boxes">Array or values of the coins in each chest</param>
+        /// <returns>The difference between the totals based on the order
+        /// of chooisng chests (+ve difference indicates better result for
+        /// person chooisng first)</returns>
+        /// <exception cref="System.ArgumentNullException">thrown when the 
+        /// array of coin values is null</exception>
         public static int Solve(int[] boxes)
         {
+            if (boxes is null) throw new ArgumentNullException();
+#if DEBUG
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+#endif
+            if (boxes.Length is 1) return boxes[0]; // Nothing to calculate. Alex gets the coins if only 1 chest
             int n = boxes.Length;
-            // Create a table to store solutions of subproblems 
+
+            // Create a table to store results, allowing re-use
+            // if the same result occurs in a later iteration.
+            // This saves on time by caching results to be returned.
+            // (ie. implementation of memoization)
+            // SPace complexity: O(n^2)
             int[,] table = new int[n, n]; 
-            int gap, i, j, x, y, z; 
+            int gap;      // staerting difference in positions in the table
+            int i, j;     // pointers to cells in the table and to chests in the array
+            int x, y, z;  // incremental sum of possible coin combinations
     
-            // Fill table using above recursive formula. 
-            // Note that the table is filled in diagonal 
-            // fashion (similar to http:// goo.gl/PQqoS), 
-            // from diagonal elements to table[0][n-1] 
-            // which is the result. 
-            for (gap = 0; gap < n; ++gap) { 
-                for (i = 0, j = gap; j < n; ++i, ++j) { 
-    
-                    // Here x is value of F(i+2, j), 
-                    // y is F(i+1, j-1) and z is 
-                    // F(i, j-2) in above recursive formula 
+            // Time complexity: O(n^2)
+            // This approach minimises the re-calculation of
+            // overlapping solutions.
+            for (gap = 0; gap < n; gap++) { 
+                for (i = 0, j = gap; j < n; i++, j++) {
                     x = ((i + 2) <= j) ? table[i + 2, j] : 0; 
                     y = ((i + 1) <= (j - 1)) ? table[i + 1, j - 1] : 0; 
                     z = (i <= (j - 2)) ? table[i, j - 2] : 0; 
@@ -47,11 +72,15 @@ namespace Task_6_2
                 } 
             } 
 
-            int total = n % 2 == 0 ? table[0, n - 1] - table[1, n - 1] : table[0, n - 1] - table[0, n - 2]; 
-            Console.WriteLine("Total: {0}", total);
+            // Account for different position of final results depending on odd or even number of chests
+            int result = Math.Max(table[0, n - 1] - table[1, n - 1], table[0, n - 1] - table[0, n - 2]);
+#if DEBUG
+            stopwatch.Stop();
+            Console.WriteLine("Result: {0}", result);
+            Console.WriteLine("Duration: {0}", stopwatch.Elapsed);
             PrintTable(table, n);
-            // return table[0, n - 1] - table[0, n - 2]; 
-            return Math.Max(table[0, n - 1] - table[1, n - 1], table[0, n - 1] - table[0, n - 2]);
+#endif
+            return result;
         }        
     }
 
