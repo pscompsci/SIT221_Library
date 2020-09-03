@@ -276,7 +276,7 @@ namespace Task_5_1
         public void RemoveLast()
         {
             if (Count is 0) throw new InvalidOperationException();
-            Node<T> node= Tail.Previous;
+            Node<T> node = Tail.Previous;
             Tail.Previous = node.Previous;
             Tail.Previous.Next = Tail;
             InvalidateNode(node);

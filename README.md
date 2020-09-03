@@ -64,6 +64,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 * [Doubly Linked List](/Task_5_1/DoublyLinkedList.cs)
 * [Stack](/Task_6_1/Stack.cs) - this generic implementation provides Push(), Pop() and Min() in Theta(1) time complexity
 * [Specialised Stack](/Task_6_1/IntStack.cs)  - this implements Push(), Pop() and Min() in Theta(1) time complexity
+* [AVL Tree](/Task_7_1/AVLTree.cs)
 
 <!-- ALGORITHMS -->
 ## Algorithms
@@ -75,6 +76,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 * Mergesort Bottom Up (iterative)
 * Randomised in-place Quicksort
 * Binary Search
+* AVL Tree rotations
 
 <!-- DESIGN PATTERNS -->
 ## Design Patterns
