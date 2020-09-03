@@ -152,7 +152,8 @@ namespace Task_4_1
         {
             if (lower > upper) return -1;
             int mid = (int)(upper + lower) / 2;
-            if (comparer.Compare(element, data[mid]) < 0) return BinarySearch(element, comparer, lower, mid - 1);
+            if (comparer.Compare(element, data[mid]) < 0)
+                return BinarySearch(element, comparer, lower, mid - 1);
             else if (comparer.Compare(element, data[mid]) == 0) return mid;
             else return BinarySearch(element, comparer, mid + 1, upper);
         }

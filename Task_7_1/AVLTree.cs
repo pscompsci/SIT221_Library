@@ -1,389 +1,296 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net.Http.Headers;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
+using System.Diagnostics.Contracts;
 
 #pragma warning disable 693
 
-
 namespace Task_7_1
 {
+    public enum DisplayMethod
+    {
+        InOrder,
+        PreOrder,
+        PostOrder,
+        BreadthFirst
+    }
+
     public class AVLTree<T> where T : IComparable<T>
     {
         public class Node<T> : INode<T> where T : IComparable<T>
         {
             public T Key { get; set; }
-            public Node<T> Right;
-            public Node<T> Left;
-
-            public Node (T key)
+            public Node<T> Left { get; set; }
+            public Node<T> Right { get; set; }
+            public Node(T key)
             {
-                Key = key;
-                Right = null;
-                Left = null;
-            }
-
-            public int Height()
-            {
-                if (Right is null && Left is null) return 1;
-                if (Right == null) return Left.Height() + 1;
-                if (Left == null) return Right.Height() + 1;
-                if (Right.Height() > Left.Height()) return Right.Height() + 1;
-                return Left.Height() + 1;
-            }
-
-            public int Balance()
-            { 
-                if (Right is null && Left is null) return 0;
-                if (Right is null) return -Left.Height();
-                if (Left is null) return Right.Height();
-                return Right.Height() - Left.Height();
-            }
-
-            public bool IsLessThan(Node<T> node) => Key.CompareTo(node.Key) < 0;
-
-            public Node<T> FindReplacement()
-            {
-                if(Left is null) return null;
-                Node<T> current = Left;
-                while(current.Right != null) current = current.Right;
-                return current;
+               Key = key;
             }
         }
 
-        Node<T> Root;
-        public int Count;
-
+        public Node<T> Root { get; set; }
+        public int Count { get; set; }
+#if DEBUG
+        private List<KeyValuePair<string, T>> _rotations; 
+#endif
         public AVLTree()
         {
-            Root = null;
-            Count = 0;
+#if DEBUG
+            _rotations = new List<KeyValuePair<string, T>>();
+#endif
         }
 
-        public Node<T> FindParent(T key)
-        {
-            Node<T> previous = null;
-            Node<T> current = Root;
-
-            while (current != null)
-            {
-                if (current.Key.Equals(key)) return previous;
-                else if (key.CompareTo(current.Key) > 0)
-                {
-                    previous = current;
-                    current = current.Right;
-                }
-                else
-                {
-                    previous = current;
-                    current = current.Left;
-                }
-            }
-            return previous;
-        }
-
-        public Node<T> Find(T key)
-        {
-            Node<T> current = Root;
-            while (current != null)
-            {
-                if (current.Key.Equals(key))
-                {
-                    return current;
-                }
-                else if (current.Key.CompareTo(key) < 0)
-                {
-                    current = current.Right;
-                }
-                else
-                {
-                    current = current.Left;
-                }
-            }
-            return null;
-        }
-
-        private Node<T> FindParent(Node<T> node)
-        {
-            Node<T> previous = null;
-            Node<T> current = Root;
-
-            while (current != null)
-            {
-                if (current.Equals(node))
-                {
-                    return previous;
-                }
-                else if (node.Key.CompareTo(current.Key) > 0)
-                {
-                    previous = current;
-                    current = current.Right;
-                }
-                else
-                {
-                    previous = current;
-                    current = current.Left;
-                }
-            }
-
-            return null;
-        }
-
-
-        public void Insert(T key)
+        public void Insert(T value)
         {
 #if DEBUG
-            Console.WriteLine("Inserting {0}", key);
+            _rotations.Clear();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Inserting {0}", value);
+            Console.ResetColor();
 #endif
-            if (Root == null)
+            Node<T> node = new Node<T>(value);
+            if (Root is null)
             {
-#if DEBUG
-                Console.WriteLine("Inserting {0} as Root", key);
-#endif
-                Root = new Node<T>(key);
-                Count++;
-                return;
+                Root = node;
             }
+            else
+            {
+                Root = RecursiveInsert(Root, node);
+            }
+#if DEBUG
+            Console.WriteLine("Inserted");
+            if (_rotations.Count > 0)
+            {
+                foreach(var pair in _rotations)
+                {
+                    Console.WriteLine("Rotated {0} on {1}", pair.Key, pair.Value);
+                }
+                Console.WriteLine();
+            }
+            Console.Write("{0,-30}", "Current BreadthFirst Order:");
+            Display(DisplayMethod.BreadthFirst);
+#endif
             Count++;
-            Insert(key, Root);
         }
 
-        private void Insert(T key, Node<T> current)
+        private Node<T> RecursiveInsert(Node<T> current, Node<T> node)
         {
-#if DEBUG
-            Console.WriteLine("Current Node: {1}", key, current.Key);
-#endif
-            bool shouldInsert = false;
-            if (key.CompareTo(current.Key) < 0)
+            if (current is null)
             {
-                if (current.Left != null)
+                current = node;
+                return current;
+            }
+#if DEBUG
+            Console.WriteLine("Current Node: {0}", current.Key);
+#endif
+            if (node.Key.CompareTo(current.Key) < 0)
+            {
+                current.Left = RecursiveInsert(current.Left, node);
+                current = BalanceTree(current);
+            }
+            else if (node.Key.CompareTo(current.Key) > 0)
+            {
+                current.Right = RecursiveInsert(current.Right, node);
+                current = BalanceTree(current);
+            }
+            return current;
+        }
+        private Node<T> BalanceTree(Node<T> node)
+        {
+            int balanceFactor = BalanceFactor(node);
+            if (balanceFactor > 1)
+            {
+                if (BalanceFactor(node.Left) > 0)
                 {
-                    Insert(key, current.Left);
+                    node = RotateLeft(node);
                 }
                 else
                 {
-                    shouldInsert = true;
+                    node = RotateLeftRight(node);
                 }
             }
+            else if (balanceFactor < -1)
+            {
+                if (BalanceFactor(node.Right) > 0)
+                {
+                    node = RotateRightLeft(node);
+                }
+                else
+                {
+                    node = RotateRight(node);
+                }
+            }
+            return node;
+        }
+        public void Remove(T value)
+        {
+#if DEBUG
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Removing {0}", value);
+            Console.ResetColor();
+#endif
+            Root = Remove(Root, value);
+#if DEBUG
+            Console.WriteLine("Removed");
+            Console.Write("{0,-30}", "Current BreadthFirst Order:");
+            Display(DisplayMethod.BreadthFirst);
+#endif
+        }
+
+        private Node<T> Remove(Node<T> node, T value)
+        {
+            Node<T> parent;
+            if (node is null) return null;
             else
             {
-                if (current.Right != null)
+                if (value.CompareTo(node.Key) < 0)
                 {
-                    Insert(key, current.Right);
-                }
-                else
-                {
-                    shouldInsert = true;
-                }
-            }
-
-            if (shouldInsert)
-            {
-                if (key.CompareTo(current.Key) < 0)
-                {
-                    current.Left = new Node<T>(key);
-#if DEBUG
-                    Console.WriteLine("Inserted to the left");
-#endif
-                }
-                else
-                {
-                    current.Right = new Node<T>(key);
-#if DEBUG
-                    Console.WriteLine("Inserted to the right");
-#endif
-                }
-                shouldInsert = false;
-            }
-
-            while (Math.Abs(current.Balance()) > 1)
-            {
-                if (current.Balance() > 1)
-                {
-                    LeftRotation(current);
-                }
-                else if (current.Balance() < 1)
-                {
-                    RightRotation(current);
-                }
-            }
-        }
-
-
-        private void LeftRotation(Node<T> node)
-        {
-#if DEBUG
-            Console.WriteLine("LeftRotation on {0}", node.Key);
-#endif
-            Node<T> parentNode = FindParent(node);
-            Node<T> newHead = node.Right;
-            Node<T> tempHolder;
-
-            if (newHead.Right == null && newHead.Left != null)
-            {
-                RightRotation(newHead);
-                newHead = node.Right;
-            }
-
-            if (parentNode != null)
-            {
-                if (parentNode.Right == node)
-                {
-                    parentNode.Right = newHead;
-                }
-                else
-                {
-                    parentNode.Left = newHead;
-                }
-            }
-            else
-            {
-                Root = newHead;
-            }
-            tempHolder = newHead.Left;
-
-            newHead.Left = node;
-            node.Right = tempHolder;
-#if DEBUG
-            Console.WriteLine("Root is now: {0}", Root.Key);
-#endif
-        }
-
-        private void RightRotation(Node<T> node)
-        {
-#if DEBUG
-            Console.WriteLine("RightRotation on {0}", node.Key);
-#endif
-            Node<T> parentNode = FindParent(node);
-            Node<T> newHead = node.Left;
-            Node<T> tempHolder;
-
-            if (newHead.Left == null && newHead.Right != null)
-            {
-                LeftRotation(newHead);
-                newHead = node.Left;
-            }
-
-            if (parentNode != null)
-            {
-                if (parentNode.Left == node)
-                {
-                    parentNode.Left = newHead;
-                }
-                else
-                {
-                    parentNode.Right = newHead;
-                }
-            }
-            else
-            {
-                Root = newHead;
-            }
-            tempHolder = newHead.Right;
-
-            newHead.Right = node;
-            node.Left = tempHolder;
-#if DEBUG
-            Console.WriteLine("Root is now: {0}", Root.Key);
-#endif
-        }
-
-        public bool Remove(T key)
-        {
-            if (Root == null)
-            {
-                return false;
-            }
-
-            Node<T> node = Find(key);
-            if (node == null)
-            {
-                return false;
-            }
-            Node<T> current = Root;
-
-            Count--;
-            Remove(node, current);
-            return true;
-        }
-
-        private void Remove(Node<T> node, Node<T> current)
-        {
-            if (node == current)
-            {
-                Node<T> LeftMax = node.FindReplacement();
-                Node<T> parentNode = FindParent(node);
-
-                if (LeftMax != null)
-                {
-                    Node<T> replacementNode = new Node<T>(LeftMax.Key);
-                    replacementNode.Left = node.Left;
-                    replacementNode.Right = node.Right;
-
-                    if (node != Root)
+                    node.Left = Remove(node.Left, value);
+                    if (BalanceFactor(node) == -2)
                     {
-                        if (node.IsLessThan(parentNode))
+                        if (BalanceFactor(node.Right) <= 0)
                         {
-                            parentNode.Left = replacementNode;
+                            node = RotateRight(node);
                         }
                         else
                         {
-                            parentNode.Right = replacementNode;
+                            node = RotateRightLeft(node);
+                        }
+                    }
+                }
+                else if (value.CompareTo(node.Key) > 0)
+                {
+                    node.Right = Remove(node.Right, value);
+                    if (BalanceFactor(node) == 2)
+                    {
+                        if (BalanceFactor(node.Left) >= 0)
+                        {
+                            node = RotateLeft(node);
+                        }
+                        else
+                        {
+                            node = RotateLeftRight(node);
+                        }
+                    }
+                }
+                else
+                {
+                    if (node.Right != null)
+                    {
+                        parent = node.Right;
+                        while (parent.Left != null)
+                        {
+                            parent = parent.Left;
+                        }
+                        node.Key = parent.Key;
+                        node.Right = Remove(node.Right, parent.Key);
+                        if (BalanceFactor(node) == 2)
+                        {
+                            if (BalanceFactor(node.Left) >= 0)
+                            {
+                                node = RotateLeft(node);
+                            }
+                            else 
+                            { 
+                                node = RotateLeftRight(node); 
+                            }
                         }
                     }
                     else
                     {
-                        Root = replacementNode;
+                        return node.Left;
                     }
-                    current = replacementNode;
-                }
-                else
-                {
-                    if (node != Root)
-                    {
-                        if (node.IsLessThan(parentNode) || node.Key.Equals(parentNode.Key))
-                        {
-                            parentNode.Left = node.Right;
-                        }
-                        else
-                        {
-                            parentNode.Right = node.Right;
-                        }
-                    }
-                    else
-                    {
-                        Root = node.Right;
-                    }
-                }
-
-                if (LeftMax != null)
-                {
-                    Remove(LeftMax, current.Left);
                 }
             }
-            else if (current.IsLessThan(node))
+            return node;
+        }
+
+        public Node<T> Find(T value)
+        {
+            return Find(Root, value);
+        }
+
+        private Node<T> Find(Node<T> node, T value)
+        {
+
+            if (value.CompareTo(node.Key) < 0)
             {
-                Remove(node, current.Right);
+                if (value.Equals(node.Key))
+                {
+                    return node;
+                }
+                else
+                    return Find(node.Left, value);
             }
             else
             {
-                Remove(node, current.Left);
-            }
-
-            while (Math.Abs(current.Balance()) > 1)
-            {
-                if (current.Balance() > 1)
+                if (value.Equals(node.Key))
                 {
-                    LeftRotation(current);
+                    return node;
                 }
                 else
-                {
-                    RightRotation(current);
-                }
+                    return Find(node.Right, value);
             }
         }
 
+        private int Max(int l, int r)
+        {
+            return l > r ? l : r;
+        }
+
+        private int GetHeight(Node<T> node)
+        {
+            int height = 0;
+            if (node != null)
+            {
+                int l = GetHeight(node.Left);
+                int r = GetHeight(node.Right);
+                int m = Max(l, r);
+                height = m + 1;
+            }
+            return height;
+        }
+        private int BalanceFactor(Node<T> node)
+        {
+            int l = GetHeight(node.Left);
+            int r = GetHeight(node.Right);
+            return l - r;
+        }
+
+        private Node<T> RotateRight(Node<T> parent)
+        {
+#if DEBUG
+            _rotations.Add(new KeyValuePair<string, T>("Left", parent.Key));
+#endif
+            Node<T> pivot = parent.Right;
+            parent.Right = pivot.Left;
+            pivot.Left = parent;
+            return pivot;
+        }
+
+        private Node<T> RotateLeft(Node<T> parent)
+        {
+#if DEBUG
+            _rotations.Add(new KeyValuePair<string, T>("Right", parent.Key));
+#endif
+            Node<T> pivot = parent.Left;
+            parent.Left = pivot.Right;
+            pivot.Right = parent;
+            return pivot;
+        }
+
+        private Node<T> RotateLeftRight(Node<T> parent)
+        {
+            Node<T> pivot = parent.Left;
+            parent.Left = RotateRight(pivot);
+            return RotateLeft(parent);
+        }
+
+        private Node<T> RotateRightLeft(Node<T> parent)
+        {
+            Node<T> pivot = parent.Right;
+            parent.Right = RotateLeft(pivot);
+            return RotateRight(parent);
+        }
 
         public List<T> InOrder()
         {
@@ -415,11 +322,11 @@ namespace Task_7_1
 
             void PostOrder(Node<T> node)
             {
-                if(node.Left != null)
+                if (node.Left != null)
                 {
                     PostOrder(node.Left);
                 }
-                if(node.Right != null)
+                if (node.Right != null)
                 {
                     PostOrder(node.Right);
                 }
@@ -437,11 +344,11 @@ namespace Task_7_1
             void PreOrder(Node<T> node)
             {
                 result.Add(node.Key);
-                if(node.Left != null)
+                if (node.Left != null)
                 {
                     PreOrder(node.Left);
                 }
-                if(node.Right != null)
+                if (node.Right != null)
                 {
                     PreOrder(node.Right);
                 }
@@ -450,10 +357,10 @@ namespace Task_7_1
 
         public List<T> BreadthFirst()
         {
+            if (Root is null) return null;
             List<T> result = new List<T>();
             Queue<Node<T>> nodes = new Queue<Node<T>>();
             BreadthFirst(Root);
-
             return result;
 
             void BreadthFirst(Node<T> node)
@@ -463,7 +370,7 @@ namespace Task_7_1
                 {
                     nodes.Enqueue(node.Left);
                 }
-                if(node.Right != null)
+                if (node.Right != null)
                 {
                     nodes.Enqueue(node.Right);
                 }
@@ -472,6 +379,41 @@ namespace Task_7_1
                     BreadthFirst(nodes.Dequeue());
                 }
             }
+        }
+
+        public void Display(DisplayMethod method)
+        {
+            List<T> result;
+            switch (method)
+            {
+                case DisplayMethod.InOrder:
+                    result = InOrder();
+                    break;
+                case DisplayMethod.PreOrder:
+                    result = PreOrder();
+                    break;
+                case DisplayMethod.PostOrder:
+                    result = PostOrder();
+                    break;
+                case DisplayMethod.BreadthFirst:
+                default:
+                    result = BreadthFirst();
+                    break;
+
+            }
+            if (result is null)
+            {
+                Console.WriteLine("[ ]");
+                return;
+            }
+            Console.Write("[ ");
+            foreach (var value in result)
+            {
+                Node<T> node = Find(value);
+                int balanceFactor = BalanceFactor(node);
+                Console.Write(value + "(" + balanceFactor + ") ");
+            }
+            Console.WriteLine("]\n");
         }
     }
 }
