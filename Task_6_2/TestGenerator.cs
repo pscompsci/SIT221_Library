@@ -4,7 +4,7 @@
     {
         static public int Count()
         {
-            return 6;
+            return 29;
         }
         public static int Generate(int k, out int[] arg)
         {

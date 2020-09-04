@@ -54,7 +54,7 @@ namespace Task_6_2
             // (ie. implementation of memoization)
             // SPace complexity: O(n^2)
             int[,] table = new int[n, n]; 
-            int gap;      // staerting difference in positions in the table
+            int gap;      // starting difference in positions in the table
             int i, j;     // pointers to cells in the table and to chests in the array
             int x, y, z;  // incremental sum of possible coin combinations
     
