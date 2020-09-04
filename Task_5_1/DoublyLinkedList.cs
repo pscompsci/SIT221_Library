@@ -258,7 +258,7 @@ namespace Task_5_1
         }
 
         /// <summary>
-        /// Removes the Head node in the linked list
+        /// Removes the first node in the linked list
         /// </summary>
         public void RemoveFirst()
         {
@@ -271,7 +271,7 @@ namespace Task_5_1
         }
 
         /// <summary>
-        /// Removes the Tail node in the linked list
+        /// Removes the last node in the linked list
         /// </summary>
         public void RemoveLast()
         {

@@ -25,7 +25,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task_6_1Tests", "Task_6_1Te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task_7_1", "Task_7_1\Task_7_1.csproj", "{0223573F-A0EB-430F-80CC-973A8C781492}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task_8_1", "Task_8_1\Task_8_1.csproj", "{E758B8BB-D557-4206-9EEC-12061CAB11F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task_8_1", "Task_8_1\Task_8_1.csproj", "{E758B8BB-D557-4206-9EEC-12061CAB11F2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C954CB7C-1EB6-428A-B20B-A24FD2298587}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

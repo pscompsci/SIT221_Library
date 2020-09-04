@@ -33,7 +33,7 @@
 
 - [Table of Contents](#table-of-contents)
 - [About The Project](#about-the-project)
-  - [Built With](#built-with)
+- [Built With](#built-with)
 - [License](#license)
 - [Data Structures](#data-structures)
 - [Algorithms](#algorithms)
@@ -65,6 +65,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 * [Stack](/Task_6_1/Stack.cs) - this generic implementation provides Push(), Pop() and Min() in Theta(1) time complexity
 * [Specialised Stack](/Task_6_1/IntStack.cs)  - this implements Push(), Pop() and Min() in Theta(1) time complexity
 * [AVL Tree](/Task_7_1/AVLTree.cs)
+* [Heap](/Task_8_1/Heap.cs)
 
 <!-- ALGORITHMS -->
 ## Algorithms
@@ -77,6 +78,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 * Randomised in-place Quicksort
 * Binary Search
 * AVL Tree rotations
+* Heap operations
 
 <!-- DESIGN PATTERNS -->
 ## Design Patterns
