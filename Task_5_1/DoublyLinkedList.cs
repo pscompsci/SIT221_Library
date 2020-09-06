@@ -228,26 +228,14 @@ namespace Task_5_1
         /// <exception cref="System.ArgumentNullException">Thrown when the node is null</exception>
         /// <exception cref="System.InvalidOperationException">Thrown when the node to 
         /// remove does not exist</exception>
-        // public void Remove(INode<T> node)
-        // {
-        //     if (node is null) throw new ArgumentNullException();
-        //     Node<T> result = Find(node.Value) as Node<T>;
-        //     if (result is null) throw new InvalidOperationException();
-        //     result.Previous.Next = result.Next;
-        //     result.Next.Previous = result.Previous;
-        //     InvalidateNode(result);
-        //     Count--;
-        // }
-
         public void Remove(INode<T> node)
         {
             if (node is null) throw new ArgumentNullException();
-            Node<T> result = node as Node<T>;
-            if (result.Previous is null || result.Next is null) throw new InvalidOperationException();
+            Node<T> result = Find(node.Value) as Node<T>;
+            if (result is null) throw new InvalidOperationException();
             result.Previous.Next = result.Next;
             result.Next.Previous = result.Previous;
-            result.Next = null;
-            result.Previous = null;
+            InvalidateNode(result);
             Count--;
         }
 
