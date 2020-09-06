@@ -17,6 +17,7 @@ namespace Task_6_2
                 {
                     int[] boxes = null;
                     int result = TestGenerator.Generate(i, out boxes);
+                    Console.Write("Test #{0}: ", i+1);
                     Console.WriteLine("\nAttempting test instance {0} with [{1}] as the argument and {2} as the expected answer", i, String.Join(", ",boxes), result);
                     int answer = BoxOfCoins.Solve(boxes);
                     if (result == answer)

@@ -41,7 +41,15 @@ namespace Task_6_2
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 #endif
-            if (boxes.Length is 1) return boxes[0]; // Nothing to calculate. Alex gets the coins if only 1 chest
+            if (boxes.Length is 1)
+            {
+                int result_1 = boxes[0]; // Nothing to calculate. Alex gets the coins if only 1 chest
+#if DEBUG
+                stopwatch.Stop();
+                Console.WriteLine("Duration: {0}", stopwatch.Elapsed);
+#endif
+                return result_1;
+            }
             int n = boxes.Length;
 
             // Create a table to store results, allowing re-use
@@ -79,5 +87,4 @@ namespace Task_6_2
             return result;
         }        
     }
-
 }
