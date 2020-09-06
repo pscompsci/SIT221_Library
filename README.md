@@ -33,11 +33,12 @@
 
 - [Table of Contents](#table-of-contents)
 - [About The Project](#about-the-project)
-- [Built With](#built-with)
+  - [Built With](#built-with)
 - [License](#license)
 - [Data Structures](#data-structures)
 - [Algorithms](#algorithms)
 - [Design Patterns](#design-patterns)
+- [Submissions](#submissions)
 - [Contact](#contact)
 
 
@@ -90,6 +91,24 @@ Distributed under the MIT License. See `LICENSE` for more information.
 To run all unit tests, run:
 
 ```dotnet test```
+
+<!-- SUBMITTED TASKS -->
+## Submissions
+* [Task 0.1](/submissions/Practical%20Task%200.1.pdf)
+* [Task 1.1P](submissions/Practical%20Task%201.1.pdf)
+* [Task 2.1P](submissions/Practical%20Task%202.1.pdf)
+* [Task 2.2C](submissions/Practical%20Task%202.2.pdf)
+* [Task 3.1P](submissions/Practical%20Task%203.1.pdf)
+* [Task 3.2D](submissions/Practical%20Task%203.2.pdf)
+* [Task 4.1C](submissions/Practical%20Task%204.1.pdf)
+* [Task 4.2HD] - to come
+* [Task 5.1P](submissions/Practical%20Task%205.1.pdf)
+* [Task 6.1C](submissions/Practical%20Task%206.1.pdf)
+* [Task 6.2D](submissions/Practical%20Task%206.2.pdf)
+* [Task 7.1P](submissions/Practical%20Task%207.1.pdf)
+* [Task 8.1C] - to come
+* [Task 8.2 HD] - to come
+* [Task 9.1P] - to come
 
 <!-- CONTACT -->
 ## Contact
