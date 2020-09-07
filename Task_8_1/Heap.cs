@@ -129,21 +129,47 @@ namespace Task_8_1
         // Read the instruction carefully, study the code examples from above as they should help you to write the rest of the code.
         public IHeapifyable<K, D> Delete()
         {
-            // You should replace this plug by your code.
-            throw new NotImplementedException();
+            if (Count is 0) throw new InvalidOperationException();
+            Node result = data[1];
+            data[1] = data[Count];
+            Count--;
+            DownHeap(1);
+            return result;
+        }
+
+        public void DownHeap(int start)
+        {
+            if (start * 2 >= Count) return;
+            int position = start;
+            if (start * 2 + 1 == Count) position = start * 2;
+            else
+            {
+                position = comparer.Compare(data[start * 2].Key, data[start * 2 + 1].Key) <= 0 
+                ? start * 2 
+                : start * 2 + 1;
+            }
+            if(comparer.Compare(data[start].Key, data[position].Key) < 0) return;
+            Swap(start, position);
+            DownHeap(position);
         }
 
         // Builds a minimum binary heap using the specified data according to the bottom-up approach.
         public IHeapifyable<K, D>[] BuildHeap(K[] keys, D[] data)
         {
-            // You should replace this plug by your code.
-            throw new NotImplementedException();
+            if (keys.Length != data.Length) throw new InvalidOperationException();
+            Node[] result = new Node[keys.Length];
+            for(int i = 0; i < keys.Length; i++)
+            {
+                Node node = Insert(keys[i], data[i]) as Node;
+                result[i] = node;
+            }
+            return result;
         }
 
         public void DecreaseKey(IHeapifyable<K, D> element, K new_key)
         {
-            // You should replace this plug by your code.
-            throw new NotImplementedException();
+            Node result = element as Node;
+            if (!result.Equals(data[result.Position])) throw new InvalidOperationException();
         }
         public IHeapifyable<K, D> DeleteElement(IHeapifyable<K, D> element)
         {

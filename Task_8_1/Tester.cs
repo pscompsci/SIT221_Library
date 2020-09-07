@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
+#pragma warning disable 219
+
 namespace Task_8_1
 {
     class Tester
@@ -80,7 +82,6 @@ namespace Task_8_1
             try
             {
                 Console.WriteLine("\n\nTest C: Run a sequence of operations: ");
-
                 for (int i = 0; i < certificateDelete.Length; i++)
                 {
                     Console.WriteLine("\nDelete the minimum element from the min-heap.");
@@ -91,7 +92,7 @@ namespace Task_8_1
                     {
                         if ((minHeap.Min().Key != certificateDelete[i + 1]) && (minHeap.Min().Position != 1)) throw new Exception("The min-heap has a wrong structure");
                     }
-                    Console.WriteLine(" :: SUCCESS: min-heap's state " + minHeap.ToString());
+                    Console.WriteLine(" :: SUCCESS: min-heap's state {0}", minHeap.ToString());
                 }
                 result = result + "C";
             }
@@ -122,7 +123,7 @@ namespace Task_8_1
                 result = result + "-";
             }
 
-            // test 5
+            // // test 5
             try
             {
                 Console.WriteLine("\n\nTest E: Run a sequence of operations: ");
@@ -147,139 +148,139 @@ namespace Task_8_1
                 result = result + "-";
             }
 
-            // test 6
-            try
-            {
-                Console.WriteLine("\n\nTest F: Run a sequence of operations: ");
+            // // test 6
+            // try
+            // {
+            //     Console.WriteLine("\n\nTest F: Run a sequence of operations: ");
 
-                Console.WriteLine("\nClear the min-heap.");
-                minHeap.Clear();
-                Console.WriteLine(" :: SUCCESS: min-heap's state " + minHeap.ToString());
-                Console.WriteLine("\nBuild the min-heap for the pair of key-value arrays with \n[{0}] as keys and \n[{1}] as data elements", String.Join(", ", IDs), String.Join(", ", names));
-                nodes = minHeap.BuildHeap(IDs, names);
-                if (minHeap.Count != certificateMinHeapBuild.Length) throw new Exception("The resulting min-heap has a wrong number of elements.");
-                if (nodes.Length != certificateMinHeapBuild.Length) throw new Exception("The size of the resulting array returned by BuildHeap() is incorrect.");
-                for (int i = 0; i < nodes.Length; i++)
-                {
-                    if (!(nodes[i].Position == certificateMinHeapBuild[i])) throw new Exception("The min-heap has a wrong structure");
-                }
-                result = result + "F";
-                Console.WriteLine(" :: SUCCESS: min-heap's state " + minHeap.ToString());
-            }
-            catch (Exception exception)
-            {
-                try { Console.WriteLine(" :: FAIL: min-heap's state " + minHeap.ToString()); } catch { };
-                Console.WriteLine(exception.ToString());
-                result = result + "-";
-            }
-
-
-            // test 7
-            try
-            {
-                Console.WriteLine("\n\nTest G: Run a sequence of operations: ");
-
-                IHeapifyable<int, string> node = nodes[nodes.Length - 1];
-
-                Console.WriteLine("\nDelete the minimum element from the min-heap.");
-                minHeap.Delete();
-                Console.WriteLine(" :: SUCCESS: min-heap's state " + minHeap.ToString());
-                Console.WriteLine("\nDelete the minimum element from the min-heap.");
-                minHeap.Delete();
-                Console.WriteLine(" :: SUCCESS: min-heap's state " + minHeap.ToString());
-
-                Console.WriteLine("\nRun DecreaseKey(node,0) for node {0} by setting the new value of its key to 0", node);
-                minHeap.DecreaseKey(node, 0);
-
-                if (minHeap.Count != certificateMinHeapBuild.Length - 2) throw new Exception("The resulting min-heap has a wrong number of elements");
-                if (!((node.Position == 1) && (minHeap.Min().Key == node.Key))) throw new Exception("The min-heap has a wrong structure");
-                Console.WriteLine(" :: SUCCESS: min-heap's state " + minHeap.ToString());
-                result = result + "G";
-            }
-            catch (Exception exception)
-            {
-                try { Console.WriteLine(" :: FAIL: min-heap's state " + minHeap.ToString()); } catch { };
-                Console.WriteLine(exception.ToString());
-                result = result + "-";
-            }
+            //     Console.WriteLine("\nClear the min-heap.");
+            //     minHeap.Clear();
+            //     Console.WriteLine(" :: SUCCESS: min-heap's state " + minHeap.ToString());
+            //     Console.WriteLine("\nBuild the min-heap for the pair of key-value arrays with \n[{0}] as keys and \n[{1}] as data elements", String.Join(", ", IDs), String.Join(", ", names));
+            //     nodes = minHeap.BuildHeap(IDs, names);
+            //     if (minHeap.Count != certificateMinHeapBuild.Length) throw new Exception("The resulting min-heap has a wrong number of elements.");
+            //     if (nodes.Length != certificateMinHeapBuild.Length) throw new Exception("The size of the resulting array returned by BuildHeap() is incorrect.");
+            //     for (int i = 0; i < nodes.Length; i++)
+            //     {
+            //         if (!(nodes[i].Position == certificateMinHeapBuild[i])) throw new Exception("The min-heap has a wrong structure");
+            //     }
+            //     result = result + "F";
+            //     Console.WriteLine(" :: SUCCESS: min-heap's state " + minHeap.ToString());
+            // }
+            // catch (Exception exception)
+            // {
+            //     try { Console.WriteLine(" :: FAIL: min-heap's state " + minHeap.ToString()); } catch { };
+            //     Console.WriteLine(exception.ToString());
+            //     result = result + "-";
+            // }
 
 
-            // test 8
-            try
-            {
-                Console.WriteLine("\n\nTest H: Run a sequence of operations: ");
-                Console.WriteLine("\nCreate a max-heap by calling 'maxHeap = new Heap<int, string>(new IntDescendingComparer());'");
-                maxHeap = new Heap<int, string>(new IntDescendingComparer());
-                Console.WriteLine(" :: SUCCESS: max-heap's state " + maxHeap.ToString());
-                Console.WriteLine("\nBuild the max-heap for the pair of key-value arrays with \n[{0}] as keys and \n[{1}] as data elements", String.Join(", ", IDs), String.Join(", ", names));
-                nodes = maxHeap.BuildHeap(IDs, names);
-                if (maxHeap.Count != certificateMaxHeapBuild.Length) throw new Exception("The resulting  max-heap has a wrong number of elements");
-                if (nodes.Length != certificateMaxHeapBuild.Length) throw new Exception("The size of the resulting array returned by BuildHeap() is incorrect.");
-                for (int i = 0; i < nodes.Length; i++)
-                {
-                    if (!(nodes[i].Position == certificateMaxHeapBuild[i])) throw new Exception("The  max-heap has a wrong structure");
-                }
-                result = result + "H";
-                Console.WriteLine(" :: SUCCESS: max-heap's state " + maxHeap.ToString());
-            }
-            catch (Exception exception)
-            {
-                try { Console.WriteLine(" :: FAIL:  max-heap's state " + maxHeap.ToString()); } catch { };
-                Console.WriteLine(exception.ToString());
-                result = result + "-";
-            }
+            // // test 7
+            // try
+            // {
+            //     Console.WriteLine("\n\nTest G: Run a sequence of operations: ");
 
-            // test 9
-            try
-            {
-                Console.WriteLine("\n\nTest I: Run a sequence of operations: ");
+            //     IHeapifyable<int, string> node = nodes[nodes.Length - 1];
 
-                IHeapifyable<int, string> node = nodes[4];
+            //     Console.WriteLine("\nDelete the minimum element from the min-heap.");
+            //     minHeap.Delete();
+            //     Console.WriteLine(" :: SUCCESS: min-heap's state " + minHeap.ToString());
+            //     Console.WriteLine("\nDelete the minimum element from the min-heap.");
+            //     minHeap.Delete();
+            //     Console.WriteLine(" :: SUCCESS: min-heap's state " + minHeap.ToString());
 
-                Console.WriteLine("\nDelete the Richard element from the min-heap.");
-                IHeapifyable<int, string> r = minHeap.DeleteElement(node);
+            //     Console.WriteLine("\nRun DecreaseKey(node,0) for node {0} by setting the new value of its key to 0", node);
+            //     minHeap.DecreaseKey(node, 0);
 
-                if (!r.Data.Equals(node.Data)) throw new Exception("The deleted node is the incorrect node.");
-                Console.WriteLine(" :: SUCCESS: min-heap's state " + minHeap.ToString());
+            //     if (minHeap.Count != certificateMinHeapBuild.Length - 2) throw new Exception("The resulting min-heap has a wrong number of elements");
+            //     if (!((node.Position == 1) && (minHeap.Min().Key == node.Key))) throw new Exception("The min-heap has a wrong structure");
+            //     Console.WriteLine(" :: SUCCESS: min-heap's state " + minHeap.ToString());
+            //     result = result + "G";
+            // }
+            // catch (Exception exception)
+            // {
+            //     try { Console.WriteLine(" :: FAIL: min-heap's state " + minHeap.ToString()); } catch { };
+            //     Console.WriteLine(exception.ToString());
+            //     result = result + "-";
+            // }
 
-                if (minHeap.Count != certificateMinHeapBuild.Length - 3) throw new Exception("The resulting min-heap has a wrong number of elements");
-                Console.WriteLine(" :: SUCCESS: min-heap's state " + minHeap.ToString());
-                result = result + "I";
-            }
-            catch (Exception exception)
-            {
-                try { Console.WriteLine(" :: FAIL: min-heap's state " + minHeap.ToString()); } catch { };
-                Console.WriteLine(exception.ToString());
-                result = result + "-";
-            }
 
-            // test 10
-            try
-            {
-                Console.WriteLine("\n\nTest J: Run a sequence of operations: ");
+            // // test 8
+            // try
+            // {
+            //     Console.WriteLine("\n\nTest H: Run a sequence of operations: ");
+            //     Console.WriteLine("\nCreate a max-heap by calling 'maxHeap = new Heap<int, string>(new IntDescendingComparer());'");
+            //     maxHeap = new Heap<int, string>(new IntDescendingComparer());
+            //     Console.WriteLine(" :: SUCCESS: max-heap's state " + maxHeap.ToString());
+            //     Console.WriteLine("\nBuild the max-heap for the pair of key-value arrays with \n[{0}] as keys and \n[{1}] as data elements", String.Join(", ", IDs), String.Join(", ", names));
+            //     nodes = maxHeap.BuildHeap(IDs, names);
+            //     if (maxHeap.Count != certificateMaxHeapBuild.Length) throw new Exception("The resulting  max-heap has a wrong number of elements");
+            //     if (nodes.Length != certificateMaxHeapBuild.Length) throw new Exception("The size of the resulting array returned by BuildHeap() is incorrect.");
+            //     for (int i = 0; i < nodes.Length; i++)
+            //     {
+            //         if (!(nodes[i].Position == certificateMaxHeapBuild[i])) throw new Exception("The  max-heap has a wrong structure");
+            //     }
+            //     result = result + "H";
+            //     Console.WriteLine(" :: SUCCESS: max-heap's state " + maxHeap.ToString());
+            // }
+            // catch (Exception exception)
+            // {
+            //     try { Console.WriteLine(" :: FAIL:  max-heap's state " + maxHeap.ToString()); } catch { };
+            //     Console.WriteLine(exception.ToString());
+            //     result = result + "-";
+            // }
 
-                Console.WriteLine("min-heap's state " + minHeap.ToString());
+            // // test 9
+            // try
+            // {
+            //     Console.WriteLine("\n\nTest I: Run a sequence of operations: ");
 
-                IHeapifyable<int, string> node = minHeap.KthMinElement(4);
+            //     IHeapifyable<int, string> node = nodes[4];
 
-                if (!node.Data.Equals("John")) throw new Exception("The 4th deleted node" + node.ToString() + " is the incorrect node.");
-                Console.WriteLine(" :: SUCCESS: 4th Node is " + node.ToString());
+            //     Console.WriteLine("\nDelete the Richard element from the min-heap.");
+            //     IHeapifyable<int, string> r = minHeap.DeleteElement(node);
 
-                if (minHeap.Count != certificateMinHeapBuild.Length - 3) throw new Exception("The resulting min-heap has a wrong number of elements");
-                Console.WriteLine(" :: SUCCESS: min-heap's state " + minHeap.ToString());
+            //     if (!r.Data.Equals(node.Data)) throw new Exception("The deleted node is the incorrect node.");
+            //     Console.WriteLine(" :: SUCCESS: min-heap's state " + minHeap.ToString());
 
-                result = result + "J";
-            }
-            catch (Exception exception)
-            {
-                try { Console.WriteLine(" :: FAIL: min-heap's state " + minHeap.ToString()); } catch { };
-                Console.WriteLine(exception.ToString());
-                result = result + "-";
-            }
+            //     if (minHeap.Count != certificateMinHeapBuild.Length - 3) throw new Exception("The resulting min-heap has a wrong number of elements");
+            //     Console.WriteLine(" :: SUCCESS: min-heap's state " + minHeap.ToString());
+            //     result = result + "I";
+            // }
+            // catch (Exception exception)
+            // {
+            //     try { Console.WriteLine(" :: FAIL: min-heap's state " + minHeap.ToString()); } catch { };
+            //     Console.WriteLine(exception.ToString());
+            //     result = result + "-";
+            // }
+
+            // // test 10
+            // try
+            // {
+            //     Console.WriteLine("\n\nTest J: Run a sequence of operations: ");
+
+            //     Console.WriteLine("min-heap's state " + minHeap.ToString());
+
+            //     IHeapifyable<int, string> node = minHeap.KthMinElement(4);
+
+            //     if (!node.Data.Equals("John")) throw new Exception("The 4th deleted node" + node.ToString() + " is the incorrect node.");
+            //     Console.WriteLine(" :: SUCCESS: 4th Node is " + node.ToString());
+
+            //     if (minHeap.Count != certificateMinHeapBuild.Length - 3) throw new Exception("The resulting min-heap has a wrong number of elements");
+            //     Console.WriteLine(" :: SUCCESS: min-heap's state " + minHeap.ToString());
+
+            //     result = result + "J";
+            // }
+            // catch (Exception exception)
+            // {
+            //     try { Console.WriteLine(" :: FAIL: min-heap's state " + minHeap.ToString()); } catch { };
+            //     Console.WriteLine(exception.ToString());
+            //     result = result + "-";
+            // }
 
             Console.WriteLine("\n\n ------------------- SUMMARY ------------------- ");
             Console.WriteLine("Tests passed: " + result);
-            Console.ReadKey();
+            // Console.ReadKey();
 
         }
     }
