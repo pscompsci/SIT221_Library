@@ -106,7 +106,7 @@ To run all unit tests, run:
 * [Task 6.1C](submissions/Practical%20Task%206.1.pdf)
 * [Task 6.2D](submissions/Practical%20Task%206.2.pdf)
 * [Task 7.1P](submissions/Practical%20Task%207.1.pdf)
-* [Task 8.1C] - to come
+* [Task 8.1C](submissions/Practical%20Task%208.1.pdf)
 * [Task 8.2 HD] - to come
 * [Task 9.1P] - to come
 
