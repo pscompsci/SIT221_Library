@@ -127,59 +127,148 @@ namespace Task_8_1
 
         // TODO: Your task is to implement all the remaining methods.
         // Read the instruction carefully, study the code examples from above as they should help you to write the rest of the code.
+
+
+        /// <summary>
+        /// Deletes the minimum node from the Heap
+        /// </summary>
+        /// <returns>Node as an IHeapifyable, removed from the heap</returns>
         public IHeapifyable<K, D> Delete()
         {
             if (Count is 0) throw new InvalidOperationException();
             Node result = data[1];
-            data[1] = data[Count];
+            Swap(1, Count);
+            data.RemoveAt(Count);
             Count--;
             DownHeap(1);
             return result;
         }
 
-        public void DownHeap(int start)
+        // Returns the index of a possible left child of an element in the heap
+        private int Left(int start) => start * 2;
+
+        // Returns the index of a possible right child of an element in the heap
+        private int Right(int start) => start * 2 + 1;
+
+        // Recursively checks a node against its left and right children and moves the node
+        // downward in the heap as necessary, to ensure the heap property is correct
+        private void DownHeap(int start)
         {
-            if (start * 2 >= Count) return;
-            int position = start;
-            if (start * 2 + 1 == Count) position = start * 2;
-            else
-            {
-                position = comparer.Compare(data[start * 2].Key, data[start * 2 + 1].Key) <= 0 
-                ? start * 2 
-                : start * 2 + 1;
-            }
-            if(comparer.Compare(data[start].Key, data[position].Key) < 0) return;
+            int leftChild = Left(start);
+            if (leftChild > Count) return;
+            
+            int rightChild = Right(start);
+            int position = leftChild;
+
+            if (rightChild < Count && 
+                comparer.Compare(data[leftChild].Key, data[rightChild].Key) >= 0) 
+                    position = rightChild;
+
+            if (comparer.Compare(data[start].Key, data[position].Key) < 0) return;
+
             Swap(start, position);
             DownHeap(position);
         }
 
-        // Builds a minimum binary heap using the specified data according to the bottom-up approach.
+        /// <summary>
+        /// Builds a minimum binary heap using the specified data according to the bottom-up approach
+        /// </summary>
+        /// <param name="keys">Array of keys for each item of data</param>
+        /// <param name="data">Array of data to be added to the heap</param>
+        /// <returns>Array of the items in the heap</returns>
+        /// <exception cref="System.InvalidOperationException">Thrown when the heap is empty, or if the
+        /// number of keys is not the same as the number of data items</exception>
         public IHeapifyable<K, D>[] BuildHeap(K[] keys, D[] data)
         {
+            if (Count != 0) throw new InvalidOperationException();
             if (keys.Length != data.Length) throw new InvalidOperationException();
+
             Node[] result = new Node[keys.Length];
+
             for(int i = 0; i < keys.Length; i++)
             {
-                Node node = Insert(keys[i], data[i]) as Node;
+                Node node = new Node(keys[i], data[i], ++Count);
+                this.data.Add(node);
                 result[i] = node;
             }
+            Heapify();
+
             return result;
         }
 
+        // Ensures correct Heap property for a bottom-up build
+        private void Heapify()
+        {
+            for (int i = Count / 2; i > 0; i--) DownHeap(i);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="element">IHeapifyable element to change the key of</param>
+        /// <param name="new_key">New key to be applied to the element</param>
+        /// <exception cref="System.InvalidOperationException">Thrown when the state of the heap, does
+        /// not match the key and data of the passed in element</exception>
         public void DecreaseKey(IHeapifyable<K, D> element, K new_key)
         {
             Node result = element as Node;
             if (!result.Equals(data[result.Position])) throw new InvalidOperationException();
+            result.Key = new_key;
+            UpHeap(result.Position);
         }
+
+        /// <summary>
+        /// Deletes a specific node if it exists, no mater where it is in the heap
+        /// </summary>
+        /// <param name="element">IHeapifyable node to be deleted</param>
+        /// <returns>Node deleted</returns>
+        /// <exception cref="System.InvalidOperationException">Thrown when the element is null, or
+        /// if the state of the heap does not match the values contained in the element</exception>
         public IHeapifyable<K, D> DeleteElement(IHeapifyable<K, D> element)
         {
-            // You should replace this plug by your code.
-            throw new NotImplementedException();
+            if (element is null) throw new ArgumentNullException();
+
+            Node node = element as Node;
+            if (!data[node.Position].Key.Equals(element.Key)) throw new InvalidOperationException();
+
+            int position = node.Position;
+
+            // O(1) complexity
+            Swap(position, Count);
+
+            data.RemoveAt(Count);
+            Count--;
+
+            // O(log n) to repair the heap property
+            DownHeap(position);
+
+            return node;
         }
+        
+        /// <summary>
+        /// Returns the Kth minimum element of a heap
+        /// </summary>
+        /// <param name="k">The Kth element to return</param>
+        /// <returns>The Kth minimum element</returns>
         public IHeapifyable<K, D> KthMinElement(int k)
         {
-            // You should replace this plug by your code.
-            throw new NotImplementedException();
+            if (Count is 0) throw new InvalidOperationException();
+            if (k <= 0) throw new ArgumentOutOfRangeException();
+
+            Heap<K, D> queue = new Heap<K, D>(Comparer<K>.Default);
+
+            // Θ(k log k) complexity to insert k items
+            for (int i = 1; i <= k; i++) queue.Insert(data[i].Key, data[i].Data);
+
+            Node min = queue.data[1];
+
+            // Θ(k) loop to visit each node in the queue once
+            for(int i = 1; i <= queue.Count; i++)
+            {
+                if(comparer.Compare(min.Key, queue.data[i].Key) < 0) min = queue.data[i];
+            }
+
+            return min;
         }
 
     }
