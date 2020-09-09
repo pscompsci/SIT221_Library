@@ -253,7 +253,7 @@ namespace Task_8_1
         /// <returns>The Kth minimum element</returns>
         public IHeapifyable<K, D> KthMinElement(int k)
         {
-            if (Count is) throw new InvalidOperationException();
+            if (Count is 0) throw new InvalidOperationException();
             if (k <= 0 || k > Count) throw new ArgumentOutOfRangeException();
 
             IHeapifyable<K, D> kthMin = null;

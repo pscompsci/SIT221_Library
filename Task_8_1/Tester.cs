@@ -265,9 +265,9 @@ namespace Task_8_1
 
                 Console.WriteLine("min-heap's state " + minHeap.ToString());
 
-                IHeapifyable<int, string> node = minHeap.KthMinElement(5);
+                IHeapifyable<int, string> node = minHeap.KthMinElement(4);
 
-                if (!node.Data.Equals("Cindy")) throw new Exception("The 4th deleted node" + node.ToString() + " is the incorrect node.");
+                if (!node.Data.Equals("John")) throw new Exception("The 4th deleted node" + node.ToString() + " is the incorrect node.");
                 Console.WriteLine(" :: SUCCESS: 4th Node is " + node.ToString());
 
                 if (minHeap.Count != certificateMinHeapBuild.Length - 3) throw new Exception("The resulting min-heap has a wrong number of elements");
