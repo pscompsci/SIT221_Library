@@ -141,6 +141,7 @@ namespace Task_8_1
             data.RemoveAt(Count);
             Count--;
             DownHeap(1);
+            result.Position = -1;
             return result;
         }
 
