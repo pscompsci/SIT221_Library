@@ -173,9 +173,9 @@ namespace Task_5_1
         {
             if (before is null) throw new NullReferenceException();
             Node<T> result = before as Node<T>;
-            if (result != null || result.Next != null)
-                return AddBetween(value, result.Previous, result);
-            throw new InvalidOperationException();
+            if (result is null || result.Next is null)
+                throw new InvalidOperationException();
+            return AddBetween(value, result.Previous, result);
         }
 
         /// <summary>
@@ -191,9 +191,9 @@ namespace Task_5_1
         {
             if (after is null) throw new ArgumentNullException();
             Node<T> result = after as Node<T>;
-            if (result.Previous != null || result.Next != null)
-                return AddBetween(value, result, result.Next);
-            throw new InvalidOperationException();
+            if (result.Previous is null || result.Next is null)
+                throw new InvalidOperationException();
+            return AddBetween(value, result, result.Next);
         }
 
         /// <summary>
