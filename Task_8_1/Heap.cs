@@ -130,7 +130,7 @@ namespace Task_8_1
 
 
         /// <summary>
-        /// Deletes the minimum node from the Heap
+        /// Deletes the root node from the Heap
         /// </summary>
         /// <returns>Node as an IHeapifyable, removed from the heap</returns>
         public IHeapifyable<K, D> Delete()
@@ -171,7 +171,7 @@ namespace Task_8_1
         }
 
         /// <summary>
-        /// Builds a minimum binary heap using the specified data according to the bottom-up approach
+        /// Builds a binary heap using the specified data according to the bottom-up approach
         /// </summary>
         /// <param name="keys">Array of keys for each item of data</param>
         /// <param name="data">Array of data to be added to the heap</param>
@@ -203,7 +203,8 @@ namespace Task_8_1
         }
 
         /// <summary>
-        /// 
+        /// Decreases the key of the provided element to the new key value, if the state of the heap
+        /// matches the values in the passed in element
         /// </summary>
         /// <param name="element">IHeapifyable element to change the key of</param>
         /// <param name="new_key">New key to be applied to the element</param>
@@ -252,24 +253,23 @@ namespace Task_8_1
         /// <returns>The Kth minimum element</returns>
         public IHeapifyable<K, D> KthMinElement(int k)
         {
-            if (Count is 0) throw new InvalidOperationException();
-            if (k <= 0) throw new ArgumentOutOfRangeException();
+            if (Count is) throw new InvalidOperationException();
+            if (k <= 0 || k > Count) throw new ArgumentOutOfRangeException();
 
-            Heap<K, D> queue = new Heap<K, D>(Comparer<K>.Default);
+            IHeapifyable<K, D> kthMin = null;
+            List<IHeapifyable<K, D>> temp = new List<IHeapifyable<K, D>>();
 
-            // Θ(k log k) complexity to insert k items
-            for (int i = 1; i <= k; i++) queue.Insert(data[i].Key, data[i].Data);
-
-            Node min = queue.data[1];
-
-            // Θ(k) loop to visit each node in the queue once
-            for(int i = 1; i <= queue.Count; i++)
+            // O(og k) to delete an element, and deleting k elements = O(k log k)
+            for (int i = 1; i <= k; i++) 
             {
-                if(comparer.Compare(min.Key, queue.data[i].Key) < 0) min = queue.data[i];
+                if (i == k) kthMin = data[1];
+                temp.Add(this.Delete());
             }
 
-            return min;
+            // O(log k) to insert an elemenet, and inserting k elements = O(k log k)
+            foreach(var node in temp) this.Insert(node.Key, node.Data);
+            
+            return kthMin;
         }
-
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Rask_4_2
+namespace Task_9_1
 {
     class Program
     {

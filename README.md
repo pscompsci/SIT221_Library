@@ -33,7 +33,7 @@
 
 - [Table of Contents](#table-of-contents)
 - [About The Project](#about-the-project)
-  - [Built With](#built-with)
+- [Built With](#built-with)
 - [License](#license)
 - [Data Structures](#data-structures)
 - [Algorithms](#algorithms)
