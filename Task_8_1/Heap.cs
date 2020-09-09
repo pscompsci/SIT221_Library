@@ -257,18 +257,21 @@ namespace Task_8_1
             if (k <= 0 || k > Count) throw new ArgumentOutOfRangeException();
 
             IHeapifyable<K, D> kthMin = null;
+
+            // This will store values temporarily deleted from the heap
+            // Overall space complexity is O(1)
             List<IHeapifyable<K, D>> temp = new List<IHeapifyable<K, D>>();
 
-            // O(og k) to delete an element, and deleting k elements = O(k log k)
+            // O(log k) to delete an element, and deleting k elements = O(k log k) time complexity
             for (int i = 1; i <= k; i++) 
             {
                 if (i == k) kthMin = data[1];
                 temp.Add(this.Delete());
             }
 
-            // O(log k) to insert an elemenet, and inserting k elements = O(k log k)
+            // O(log k) to insert an element, and inserting k elements = O(k log k) time complexity
             foreach(var node in temp) this.Insert(node.Key, node.Data);
-            
+
             return kthMin;
         }
     }
