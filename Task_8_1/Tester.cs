@@ -282,10 +282,105 @@ namespace Task_8_1
                 result = result + "-";
             }
 
+            // Console.WriteLine("\n\n ------------------- SUMMARY ------------------- ");
+            // Console.WriteLine("Tests passed: " + result);
+            // Console.ReadKey();
+
+            // -------------------------- ADDITIONAL TESTS -------------------------
+
+            // // test 11
+            try
+            {
+                Console.WriteLine("\n\nTest K: Get the KthMinElement of -1: ");
+                Console.WriteLine("min-heap's state " + minHeap.ToString());
+
+                IHeapifyable<int, string> node = minHeap.KthMinElement(-1);
+            }
+            catch(ArgumentOutOfRangeException)
+            {
+                Console.WriteLine(" :: SUCCESS: ArgumentOutOfRangeException is thrown because the value of k is less than 1");
+                result = result + "K";
+            }
+
+            // // test 12
+            try
+            {
+                Console.WriteLine("\n\nTest L: Get the KthMinElement of Count + 1: ");
+                Console.WriteLine("min-heap's state " + minHeap.ToString());
+
+                IHeapifyable<int, string> node = minHeap.KthMinElement(minHeap.Count + 1);
+            }
+            catch(ArgumentOutOfRangeException)
+            {
+                Console.WriteLine(" :: SUCCESS: ArgumentOutOfRangeException is thrown because the value of k is larger than Count");
+                result = result + "L";
+            }
+
+            // // test 12
+            try
+            {
+                Console.WriteLine("\n\nTest M: Run a sequence of operations: ");
+                Console.WriteLine("min-heap's state " + minHeap.ToString());
+
+                IHeapifyable<int, string> node = minHeap.KthMinElement(1);
+                if (!node.Data.Equals("David")) throw new Exception("The 1st deleted node" + node.ToString() + " is the incorrect node.");
+                Console.WriteLine(" :: SUCCESS: 1st Node is " + node.ToString());
+
+                node = minHeap.KthMinElement(2);
+                if (!node.Data.Equals("Michael")) throw new Exception("The 2nd deleted node" + node.ToString() + " is the incorrect node.");
+                Console.WriteLine(" :: SUCCESS: 2nd Node is " + node.ToString());
+
+                node = minHeap.KthMinElement(3);
+                if (!node.Data.Equals("Elicia")) throw new Exception("The 3rd deleted node" + node.ToString() + " is the incorrect node.");
+                Console.WriteLine(" :: SUCCESS: 3rd Node is " + node.ToString());
+
+                node = minHeap.KthMinElement(4);
+                if (!node.Data.Equals("John")) throw new Exception("The 4th deleted node" + node.ToString() + " is the incorrect node.");
+                Console.WriteLine(" :: SUCCESS: 4th Node is " + node.ToString());
+
+                node = minHeap.KthMinElement(5);
+                if (!node.Data.Equals("Cindy")) throw new Exception("The 5th deleted node" + node.ToString() + " is the incorrect node.");
+                Console.WriteLine(" :: SUCCESS: 5th Node is " + node.ToString());
+
+                node = minHeap.KthMinElement(6);
+                if (!node.Data.Equals("Andrew")) throw new Exception("The 6th deleted node" + node.ToString() + " is the incorrect node.");
+                Console.WriteLine(" :: SUCCESS: 6th Node is " + node.ToString());
+
+                node = minHeap.KthMinElement(7);
+                if (!node.Data.Equals("Iman")) throw new Exception("The 7th deleted node" + node.ToString() + " is the incorrect node.");
+                Console.WriteLine(" :: SUCCESS: 7th Node is " + node.ToString());
+
+                node = minHeap.KthMinElement(8);
+                if (!node.Data.Equals("Guy")) throw new Exception("The 8th deleted node" + node.ToString() + " is the incorrect node.");
+                Console.WriteLine(" :: SUCCESS: 8th Node is " + node.ToString());
+
+                node = minHeap.KthMinElement(9);
+                if (!node.Data.Equals("Kevin")) throw new Exception("The 9th deleted node" + node.ToString() + " is the incorrect node.");
+                Console.WriteLine(" :: SUCCESS: 9th Node is " + node.ToString());
+
+                node = minHeap.KthMinElement(10);
+                if (!node.Data.Equals("Vicky")) throw new Exception("The 10th deleted node" + node.ToString() + " is the incorrect node.");
+                Console.WriteLine(" :: SUCCESS: 10th Node is " + node.ToString());
+
+                node = minHeap.KthMinElement(11);
+                if (!node.Data.Equals("Simon")) throw new Exception("The 11th deleted node" + node.ToString() + " is the incorrect node.");
+                Console.WriteLine(" :: SUCCESS: 11th Node is " + node.ToString());
+
+                if (minHeap.Count != certificateMinHeapBuild.Length - 3) throw new Exception("The resulting min-heap has a wrong number of elements");
+                Console.WriteLine(" :: SUCCESS: min-heap's state " + minHeap.ToString());
+
+                result = result + "M";
+            }
+            catch(Exception exception)
+            {
+                try { Console.WriteLine(" :: FAIL: min-heap's state " + minHeap.ToString()); } catch { };
+                Console.WriteLine(exception.ToString());
+                result = result + "-";
+            }
+
             Console.WriteLine("\n\n ------------------- SUMMARY ------------------- ");
             Console.WriteLine("Tests passed: " + result);
             // Console.ReadKey();
         }
     }
-
 }

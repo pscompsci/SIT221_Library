@@ -160,7 +160,7 @@ namespace Task_8_1
             int rightChild = Right(start);
             int position = leftChild;
 
-            if (rightChild < Count && 
+            if (rightChild <= Count && 
                 comparer.Compare(data[leftChild].Key, data[rightChild].Key) >= 0) 
                     position = rightChild;
 
