@@ -157,7 +157,7 @@ namespace Task_4_1
             else if (comparer.Compare(element, data[mid]) == 0) return mid;
             else return BinarySearch(element, comparer, mid + 1, upper);
         }
-        
+
         /// <summary>
         /// Returns a new IEnumerable<T> for the Vector
         /// </summary>

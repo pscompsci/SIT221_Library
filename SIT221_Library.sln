@@ -29,12 +29,28 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task_8_1", "Task_8_1\Task_8
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C954CB7C-1EB6-428A-B20B-A24FD2298587}"
 	ProjectSection(SolutionItems) = preProject
+		submissions\Practical Task 0.1.pdf = submissions\Practical Task 0.1.pdf
+		submissions\Practical Task 1.1.pdf = submissions\Practical Task 1.1.pdf
+		submissions\Practical Task 2.1.pdf = submissions\Practical Task 2.1.pdf
+		submissions\Practical Task 2.2.pdf = submissions\Practical Task 2.2.pdf
+		submissions\Practical Task 3.1.pdf = submissions\Practical Task 3.1.pdf
+		submissions\Practical Task 3.2.pdf = submissions\Practical Task 3.2.pdf
+		submissions\Practical Task 4.1.pdf = submissions\Practical Task 4.1.pdf
+		submissions\Practical Task 5.1.pdf = submissions\Practical Task 5.1.pdf
+		submissions\Practical Task 6.1.pdf = submissions\Practical Task 6.1.pdf
+		submissions\Practical Task 6.2.pdf = submissions\Practical Task 6.2.pdf
+		submissions\Practical Task 7.1.pdf = submissions\Practical Task 7.1.pdf
+		submissions\Practical Task 8.1.pdf = submissions\Practical Task 8.1.pdf
+		submissions\Practical Task 9.1.pdf = submissions\Practical Task 9.1.pdf
 		README.md = README.md
+		submissions\Task_9_1_Diagrams.pptx = submissions\Task_9_1_Diagrams.pptx
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground", "Playground\Playground.csproj", "{17110D02-E296-4304-8FC3-E0C61D69B083}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Playground", "Playground\Playground.csproj", "{17110D02-E296-4304-8FC3-E0C61D69B083}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task_9_1", "Task_9_1\Task_9_1.csproj", "{0CA47857-1552-454A-A49C-26888EB6F701}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task_9_1", "Task_9_1\Task_9_1.csproj", "{0CA47857-1552-454A-A49C-26888EB6F701}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task_8_2", "Task_8_2\Task_8_2.csproj", "{6CEADBA1-A524-4C91-B924-3FB7415EC1DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -214,6 +230,18 @@ Global
 		{0CA47857-1552-454A-A49C-26888EB6F701}.Release|x64.Build.0 = Release|Any CPU
 		{0CA47857-1552-454A-A49C-26888EB6F701}.Release|x86.ActiveCfg = Release|Any CPU
 		{0CA47857-1552-454A-A49C-26888EB6F701}.Release|x86.Build.0 = Release|Any CPU
+		{6CEADBA1-A524-4C91-B924-3FB7415EC1DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CEADBA1-A524-4C91-B924-3FB7415EC1DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CEADBA1-A524-4C91-B924-3FB7415EC1DF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6CEADBA1-A524-4C91-B924-3FB7415EC1DF}.Debug|x64.Build.0 = Debug|Any CPU
+		{6CEADBA1-A524-4C91-B924-3FB7415EC1DF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6CEADBA1-A524-4C91-B924-3FB7415EC1DF}.Debug|x86.Build.0 = Debug|Any CPU
+		{6CEADBA1-A524-4C91-B924-3FB7415EC1DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CEADBA1-A524-4C91-B924-3FB7415EC1DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CEADBA1-A524-4C91-B924-3FB7415EC1DF}.Release|x64.ActiveCfg = Release|Any CPU
+		{6CEADBA1-A524-4C91-B924-3FB7415EC1DF}.Release|x64.Build.0 = Release|Any CPU
+		{6CEADBA1-A524-4C91-B924-3FB7415EC1DF}.Release|x86.ActiveCfg = Release|Any CPU
+		{6CEADBA1-A524-4C91-B924-3FB7415EC1DF}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
