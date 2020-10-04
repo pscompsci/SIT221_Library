@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Task_8_1
 {
@@ -162,7 +160,7 @@ namespace Task_8_1
             int position = leftChild;
 
             if (rightChild <= Count && 
-                comparer.Compare(data[leftChild].Key, data[rightChild].Key) >= 0) 
+                comparer.Compare(data[leftChild].Key, data[rightChild].Key) >= 0)
                     position = rightChild;
 
             if (comparer.Compare(data[start].Key, data[position].Key) < 0) return;
@@ -231,7 +229,9 @@ namespace Task_8_1
             if (element is null) throw new ArgumentNullException();
 
             Node node = element as Node;
-            if (!data[node.Position].Key.Equals(element.Key)) throw new InvalidOperationException();
+            if (!data[node.Position].Key.Equals(element.Key) ||
+                !data[node.Position].Data.Equals(element.Data)) throw new InvalidOperationException();
+            // if (!element.Equals(data[element.Position])) throw new InvalidOperationException();
 
             int position = node.Position;
 
@@ -263,14 +263,14 @@ namespace Task_8_1
             // Overall space complexity is O(1)
             List<IHeapifyable<K, D>> temp = new List<IHeapifyable<K, D>>();
 
-            // O(log k) to delete an element, and deleting k elements = O(k log k) time complexity
+            // O(log n) to delete an element, and deleting k elements = O(k log n) time complexity
             for (int i = 1; i <= k; i++) 
             {
                 if (i == k) kthMin = data[1];
                 temp.Add(this.Delete());
             }
 
-            // O(log k) to insert an element, and inserting k elements = O(k log k) time complexity
+            // O(log n) to insert an element, and inserting k elements = O(k log n) time complexity
             foreach(var node in temp) this.Insert(node.Key, node.Data);
 
             return kthMin;

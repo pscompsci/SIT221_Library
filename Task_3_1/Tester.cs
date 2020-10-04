@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Task_3_1
 {
@@ -316,7 +317,33 @@ namespace Task_3_1
 
             Console.WriteLine("\n\n ------------------- SUMMARY ------------------- ");
             Console.WriteLine("Tests passed: " + result);
-            Console.ReadKey();
+
+            // *************** DATA COLLECTION FOR RUNTIME TESTING *******************
+
+            int runs = 100;
+            int n = 100000001;
+            Stopwatch sw = new Stopwatch();
+
+            for (int i = 1; i < n; i+=1000000)
+            {
+                vector = new Vector<int>(i);
+                for (int j = 0; j < i; j++) vector.Add(j);
+                vector.Sorter = new BubbleSort();
+                long total_runtime = 0;
+                for (int x = 0; x < runs; x++)
+                {
+                    sw.Start();
+                    vector.Sort(new AscendingIntComparer());
+                    sw.Stop();
+                    total_runtime += sw.ElapsedTicks;
+                    sw.Reset();
+                }
+                long average_runtime = total_runtime / runs;
+                Console.WriteLine("{0}: {1}", i, average_runtime);
+            }
+
+
+            // Console.ReadKey();
         }
     }
 }

@@ -158,18 +158,16 @@ namespace Task_8_1
                 Console.WriteLine(" :: SUCCESS: min-heap's state " + minHeap.ToString());
                 Console.WriteLine("\nBuild the min-heap for the pair of key-value arrays with \n[{0}] as keys and \n[{1}] as data elements", String.Join(", ", IDs), String.Join(", ", names));
                 nodes = minHeap.BuildHeap(IDs, names);
+                foreach(var node in nodes) Console.WriteLine(node);
                 if (minHeap.Count != certificateMinHeapBuild.Length) throw new Exception("The resulting min-heap has a wrong number of elements.");
                 if (nodes.Length != certificateMinHeapBuild.Length) throw new Exception("The size of the resulting array returned by BuildHeap() is incorrect.");
                 Console.WriteLine();
                 for (int i = 0; i < nodes.Length; i++)
                 {
-                    // if (nodes[i] is null) continue;
-                    // Console.WriteLine("{0,-20}{1,2}", nodes[i].ToString(), certificateMinHeapBuild[i]);
                     if (!(nodes[i].Position == certificateMinHeapBuild[i])) throw new Exception("The min-heap has a wrong structure");
                 }
                 result = result + "F";
                 Console.WriteLine(" :: SUCCESS: min-heap's state " + minHeap.ToString());
-                // Console.WriteLine("min-heap's state " + minHeap.ToString());
             }
             catch (Exception exception)
             {

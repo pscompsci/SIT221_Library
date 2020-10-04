@@ -183,6 +183,8 @@ namespace Task_5_1
             {
                 Console.WriteLine("\nTest H: Run a sequence of operations: ");
 
+                Console.WriteLine("list.First is {0}", list.First.ToString());
+
                 Console.WriteLine("Remove the node list.First with list.Remove(list.First)");
                 list.Remove(list.First);
                 if (!CheckIntSequence(new int[] { 400, 20, 10, 100, 2, 200, 6, 8, 5, 500, 1, 600 }, list)) throw new Exception("The list stores incorrect sequence of integers");

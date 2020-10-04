@@ -15,22 +15,40 @@ namespace Task_3_1
             
             if (comparer == null) comparer = Comparer<K>.Default;
 
-            // Iterative approach using Bubble-Up
-            // (ie. smallest element in the array bubbled to the start)
-            // This version is the same as the algorithm on Page 105
-            // of the SIT221 Workbook
-            for(int i = -1; i < sequence.Length - 1; i++)
+            for(int i = 1; i < sequence.Length; i++)
             {
-                for(int j = sequence.Length - 2; j > i; j--)
+                int swaps = 0;
+                for(int j = 0; j < sequence.Length - 1; j++)
                 {
                     if(comparer.Compare(sequence[j], sequence[j + 1]) > 0)
                     {
                         K temp = sequence[j];
                         sequence[j] = sequence[j + 1];
                         sequence[j + 1] = temp;
+                        swaps++;
                     }
                 }
+                if (swaps == 0) break;
             }
+
+
+
+            // Iterative approach using Bubble-Up
+            // (ie. smallest element in the array bubbled to the start)
+            // This version is the same as the algorithm on Page 105
+            // of the SIT221 Workbook
+            // for(int i = -1; i < sequence.Length - 1; i++)
+            // {
+            //     for(int j = sequence.Length - 2; j > i; j--)
+            //     {
+            //         if(comparer.Compare(sequence[j], sequence[j + 1]) > 0)
+            //         {
+            //             K temp = sequence[j];
+            //             sequence[j] = sequence[j + 1];
+            //             sequence[j + 1] = temp;
+            //         }
+            //     }
+            // }
 
             // Iterative approach using Bubble-Down
             // (ie. largest element bubbled to the end of the array)

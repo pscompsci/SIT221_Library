@@ -202,10 +202,11 @@ namespace Task_5_1
         /// </summary>
         public void Clear()
         {
+            Node<T> temp;
             Node<T> current = Head.Next;
             while (!current.Equals(Tail))
             {
-                Node<T> temp = current;
+                temp = current;
                 current = current.Next;
                 InvalidateNode(temp);
             }
@@ -216,6 +217,7 @@ namespace Task_5_1
 
         /// <summary>
         /// Removes a node from the linked list if it exists.This will remove the first
+        /// 
         /// instance of a node with the defined value.
         /// We need to use an O(n) approach for our existing data structure to prevent
         /// the same node being removed twice, and to prevent nodes in one list being
