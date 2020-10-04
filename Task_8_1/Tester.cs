@@ -294,7 +294,7 @@ namespace Task_8_1
 
                 IHeapifyable<int, string> node = minHeap.KthMinElement(-1);
             }
-            catch(ArgumentOutOfRangeException)
+            catch (ArgumentOutOfRangeException)
             {
                 Console.WriteLine(" :: SUCCESS: ArgumentOutOfRangeException is thrown because the value of k is less than 1");
                 result = result + "K";
@@ -308,7 +308,7 @@ namespace Task_8_1
 
                 IHeapifyable<int, string> node = minHeap.KthMinElement(minHeap.Count + 1);
             }
-            catch(ArgumentOutOfRangeException)
+            catch (ArgumentOutOfRangeException)
             {
                 Console.WriteLine(" :: SUCCESS: ArgumentOutOfRangeException is thrown because the value of k is larger than Count");
                 result = result + "L";
@@ -369,7 +369,7 @@ namespace Task_8_1
 
                 result = result + "M";
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 try { Console.WriteLine(" :: FAIL: min-heap's state " + minHeap.ToString()); } catch { };
                 Console.WriteLine(exception.ToString());

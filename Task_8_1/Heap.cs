@@ -155,13 +155,19 @@ namespace Task_8_1
         {
             int leftChild = Left(start);
             if (leftChild > Count) return;
-            
+
             int rightChild = Right(start);
             int position = leftChild;
 
+<<<<<<< HEAD
             if (rightChild <= Count && 
                 comparer.Compare(data[leftChild].Key, data[rightChild].Key) >= 0)
                     position = rightChild;
+=======
+            if (rightChild <= Count &&
+                comparer.Compare(data[leftChild].Key, data[rightChild].Key) >= 0)
+                position = rightChild;
+>>>>>>> 938f432e49a79c2e73bc75be1132a1ae614a480d
 
             if (comparer.Compare(data[start].Key, data[position].Key) < 0) return;
 
@@ -231,6 +237,10 @@ namespace Task_8_1
             Node node = element as Node;
             if (!data[node.Position].Key.Equals(element.Key) ||
                 !data[node.Position].Data.Equals(element.Data)) throw new InvalidOperationException();
+<<<<<<< HEAD
+=======
+
+>>>>>>> 938f432e49a79c2e73bc75be1132a1ae614a480d
             // if (!element.Equals(data[element.Position])) throw new InvalidOperationException();
 
             int position = node.Position;
