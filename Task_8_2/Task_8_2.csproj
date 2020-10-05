@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
@@ -7,13 +6,3 @@
   </PropertyGroup>
 
 </Project>
-=======
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
-
-</Project>
->>>>>>> 938f432e49a79c2e73bc75be1132a1ae614a480d
