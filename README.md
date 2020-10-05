@@ -33,7 +33,7 @@
 
 - [Table of Contents](#table-of-contents)
 - [About The Project](#about-the-project)
-- [Built With](#built-with)
+  - [Built With](#built-with)
 - [License](#license)
 - [Data Structures](#data-structures)
 - [Algorithms](#algorithms)
@@ -94,7 +94,7 @@ To run all unit tests, run:
 
 <!-- SUBMITTED TASKS -->
 ## Submissions
-* [Task 0.1](/submissions/Practical%20Task%200.1.pdf)
+* [Task 0.1](submissions/Practical%20Task%200.1.pdf)
 * [Task 1.1P](submissions/Practical%20Task%201.1.pdf)
 * [Task 2.1P](submissions/Practical%20Task%202.1.pdf)
 * [Task 2.2C](submissions/Practical%20Task%202.2.pdf)
@@ -107,7 +107,7 @@ To run all unit tests, run:
 * [Task 6.2D](submissions/Practical%20Task%206.2.pdf)
 * [Task 7.1P](submissions/Practical%20Task%207.1.pdf)
 * [Task 8.1C](submissions/Practical%20Task%208.1.pdf)
-* [Task 8.2 HD] - to come
+* [Task 8.2HD](submissions/Practical%20Task%208.2.pdf)
 * [Task 9.1P](submissions/Practical%20Task%209.1.pdf)
 
 <!-- CONTACT -->
