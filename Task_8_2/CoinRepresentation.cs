@@ -26,20 +26,30 @@ namespace CoinRepresentation
         /// the sum.
         /// 
         /// Counts duplicate solutions as a single solution, so that the total
-        /// returned is the total number of unique combuinations to the problem.
+        /// returned is the total number of unique combinations to the problem.
         /// 
         /// For example, for the sum 6, the set of coins includes:
         /// 2^0, 2^1, 2^2, 2^3, 2^4, 2^5 and 2^6, or a set containing
         /// (1, 1, 2, 2, 4, 4, 8, 8, 16, 16, 32, 32, 64, 64)
         /// 
-        /// The solution optimises the problem space to ignore coins
-        /// that exceed the total.
+        /// The solution optimizes the problem space to ignore coins
+        /// that exceed the total. This is achieved by caching of results.
         /// 
         /// For the example total of 6, 3 is returned, for
         /// the combinations:
         /// 4 + 1 + 1
         /// 4 + 2
         /// 2 + 2 + 1 + 1
+        /// 
+        /// <b>References:</b>
+        /// 
+        /// Korsch, J. F., LaFollette, P. (2002); Loopless Generation of Trees with
+        /// Specific Degrees; <i>The Computer Journal</i>; Vol 45, No. 3, 2003, 
+        /// pp 364-372; The British Computer Society
+        /// 
+        /// Korsch, J., LaFollette, P., Lipschutz, S. (2003); Loopless Algorithms and
+        /// Schroder Trees; <i>International Journal of Computer Mathematics; Vol. 80,
+        /// June 2003, pp 709-725; Taylor & Francis
         /// </summary>
         /// <param name="sum">The sum as a long, to find combinations for</param>
         /// <returns>The total number of unique combinations that add up to sum</returns>
