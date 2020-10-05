@@ -42,7 +42,7 @@ namespace CoinRepresentation
         /// 2 + 2 + 1 + 1
         /// </summary>
         /// <param name="sum">The sum as a long, to find combinations for</param>
-        /// <returns></returns>
+        /// <returns>The total number of unique combinations that add up to sum</returns>
         public static long Solve(long sum)
         {
             if (sum < 0) return 0; // No coins and no sum possible
