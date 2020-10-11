@@ -13,8 +13,8 @@ namespace Task_2_1
     {
         static void Main(string[] args)
         {
-            int runs = 100;
-            int N = 8;
+            int runs = 100000;
+            int N = 20;
 
             BestGenerator bestRand = new BestGenerator();
             AverageGenerator averageRand = new AverageGenerator();
@@ -120,7 +120,7 @@ namespace Task_2_1
 
     public class AverageGenerator : IRandom
     {
-        Random rnd = new Random();
+        Random rnd = new Random(Guid.NewGuid().GetHashCode());
         public double rand()
         {
             return rnd.NextDouble();

@@ -5,12 +5,13 @@ namespace Task_2_1
     class Third
     {
 
-         IRandom Random { get; set; }
+        IRandom Random { get; set; }
 
         public Third(IRandom random)
         {
             Random = random;
         }
+        
         public double Execute(int runs, int N, Case complexity)
         {
             double totalOperations = 0.0;

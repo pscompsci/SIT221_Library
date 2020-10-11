@@ -43,6 +43,11 @@ namespace CoinRepresentation
         /// 
         /// <b>References:</b>
         /// 
+        /// Horowitz, E., Sartaj, S. (1974); Computing Partitions with Applications
+        /// to the Knapsack Problem; <i>Journal of the Association for Computing
+        /// Machinery; Vol 21, No. 2; April 1974; pp. 277-292; Association of
+        /// Computing Machinery
+        /// 
         /// Korsch, J. F., LaFollette, P. (2002); Loopless Generation of Trees with
         /// Specific Degrees; <i>The Computer Journal</i>; Vol 45, No. 3, 2003, 
         /// pp 364-372; The British Computer Society
@@ -56,7 +61,6 @@ namespace CoinRepresentation
         public static long Solve(long sum)
         {
             if (sum < 0) return 0; // No coins and no sum possible
-
             if (sum is 0) return 1; // Complete combination found
             
             if(!_cache.ContainsKey(sum))
